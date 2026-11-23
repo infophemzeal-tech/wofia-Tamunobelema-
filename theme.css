@@ -1,0 +1,16 @@
+:root {
+  --color-primary: #696b50;
+  --color-primary-contrast: #faf8ef;
+  --color-bg: #f7f4e9;
+  --color-surface: #efebdd;
+  --color-text: #555544;
+  --color-muted: #918d79;
+  --color-line: #d9d4c3;
+  --color-gold: #aaa184;
+  --color-sage: #85876b;
+  --color-burgundy: #69434a;
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-script: 'Great Vibes', cursive;
+  --radius: 2px;
+}
