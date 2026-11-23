@@ -13,6 +13,15 @@
   <link rel="stylesheet" href="/theme.css">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="mobile.css">
+  <style>
+    /* Hero illustration (replaces the stock hero photo) */
+    .hero-landscape--art {
+      padding: 2.5rem 1.5rem;
+      background: linear-gradient(180deg, rgba(105, 107, 80, .12), transparent);
+      color: #696b50;
+    }
+    .hero-landscape--art svg { width: 100%; height: auto; display: block; }
+  </style>
   <script>document.documentElement.classList.add("js")</script>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -40,9 +49,11 @@
         <h1 id="couple-name">Wofai <span>&amp;</span><br>Tamunobelema</h1>
         <div class="flourish" aria-hidden="true">❧ &nbsp; ❦ &nbsp; ❧</div>
         <p class="hero-invite">joyfully invite you to celebrate<br>their wedding day</p>
-        <figure class="hero-landscape">
-          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=85" alt="A sunlit wedding celebration surrounded by loved ones">
-          <span class="landscape-wash"></span>
+        <figure class="hero-landscape hero-landscape--art" aria-hidden="true">
+          <svg viewBox="0 0 260 92" fill="none">
+            <path d="M22 74h216M44 73V48l30-20 30 20v25m-48-1V51h36v22m10-25h76v47m-68-46V36l28-18 29 18v55m-48-28h14v18h-14zm29 0h14v18h-14zm29 0h14v18h-14zm-42-20h12v13h-12zm-53-3h12v13H63zm27 0h12v13H90zM26 73V52m-6 0 6-21 6 21m158 21V39m-6 0 6-22 7 22m13 34V51m-6 0 6-18 6 18" stroke="currentColor" stroke-width=".8" />
+            <path d="M12 83h236M0 88h260" stroke="currentColor" stroke-width=".6" />
+          </svg>
         </figure>
         <div class="wedding-date">
           <p class="eyebrow">WEDDING DATE</p>
@@ -139,34 +150,6 @@
         <h3>Next chapter, <em>together.</em></h3>
         <p>We are so grateful to have you in our lives.<br>Thank you for being part of our story.</p>
       </div>
-    </section>
-
-    <section class="people-section paper-section" id="people">
-      <p class="eyebrow">MEET OUR PEOPLE</p>
-      <h2>Surrounded by <em>love.</em></h2>
-      <p class="people-intro">The friends and family who make every chapter brighter.</p>
-      <div class="people-list">
-        <article class="person"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=240&q=80" alt="Portrait of a woman">
-          <div><span>WITH US IN SPIRIT</span>
-            <h3>Our dear friends</h3>
-          </div><span class="person-flower">❧</span>
-        </article>
-        <article class="person"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=240&q=80" alt="Portrait of a man">
-          <div><span>BY OUR SIDE</span>
-            <h3>Our beloved family</h3>
-          </div><span class="person-flower">❧</span>
-        </article>
-        <article class="person"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=240&q=80" alt="Portrait of a woman">
-          <div><span>ALWAYS CLOSE</span>
-            <h3>Our favourite people</h3>
-          </div><span class="person-flower">❧</span>
-        </article>
-        <article class="person"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=240&q=80" alt="Portrait of a man">
-          <div><span>HERE FOR THE JOY</span>
-            <h3>All of you</h3>
-          </div><span class="person-flower">❧</span>
-        </article>
-      </div>
       <div class="quote-band"><span aria-hidden="true">“</span>
         <p>Two souls, one heart.</p><span class="quote-rule"></span>
       </div>
@@ -186,7 +169,7 @@
       <div class="rsvp-heading">
         <p class="eyebrow">A SEAT IS WAITING FOR YOU</p>
         <h2>Kindly <em>RSVP.</em></h2>
-        <p>Please reply by May 12, 2026.<br>We hope you can be there.</p>
+        <p>Please reply by Dec 10, 2026.<br>We hope you can be there.</p>
         <div class="rsvp-flourish">W <span>&amp;</span> T</div>
       </div>
       <form class="rsvp-form" id="rsvp-form">
