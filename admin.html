@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>RSVP Dashboard — Wofai & Tamunobelema</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#696b50;--bg:#f7f4e9;--surface:#efebdd;--text:#3f3e32;--soft:#58553f;--line:#d9d4c3;--gold:#aaa184;--ok:#2f7d4f;--no:#9a4a4a;--warn:#a8741a;
+--head:'Cormorant Garamond',Georgia,serif;--body:'Manrope',system-ui,sans-serif;--script:'Great Vibes',cursive}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:500 15px/1.5 var(--body)}
+button,input,select{font:inherit;color:inherit}
+.brand{font:400 30px var(--script);color:var(--primary)}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 5%;border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0;z-index:5}
+header.top .who{font-size:12px;color:var(--soft);display:flex;gap:12px;align-items:center}
+.btn{border:1px solid var(--primary);background:var(--primary);color:#fff;padding:11px 18px;border-radius:999px;cursor:pointer;font-size:13px;letter-spacing:.5px;min-height:44px}
+.btn.ghost{background:transparent;color:var(--primary)}
+.btn.danger{background:transparent;border-color:var(--no);color:var(--no);padding:8px 14px;min-height:36px;font-size:12px}
+.btn:disabled{opacity:.5;cursor:default}
+main{max-width:1100px;margin:0 auto;padding:24px 5% 60px}
+h1{font:500 38px/1.1 var(--head);color:var(--primary);margin:6px 0 4px}
+.sub{color:var(--soft);margin:0 0 22px}
+/* login */
+.login{max-width:380px;margin:12vh auto;padding:30px 24px;background:var(--surface);border:1px solid var(--line);text-align:center}
+.login input{width:100%;padding:14px 12px;margin:8px 0;border:1px solid #bdb8a3;background:#fff;font-size:16px}
+.login .btn{width:100%;margin-top:10px}
+.err{color:var(--no);min-height:22px;font-size:14px;margin:8px 0 0}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:22px}
+@media(min-width:760px){.stats{grid-template-columns:repeat(5,1fr)}}
+.stat{background:var(--surface);border:1px solid var(--line);padding:16px 14px}
+.stat b{display:block;font:500 36px/1 var(--head);color:var(--primary)}
+.stat span{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--soft)}
+.stat.ok b{color:var(--ok)}.stat.no b{color:var(--no)}.stat.warn b{color:var(--warn)}
+/* toolbar */
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.bar input[type=search],.bar select{padding:11px 12px;border:1px solid #bdb8a3;background:#fff;min-height:44px;font-size:16px}
+.bar input[type=search]{flex:1 1 200px}
+.bar label{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--soft)}
+.bar .sp{flex:1}
+/* list */
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line)}
+th,td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--soft);background:var(--surface)}
+.tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;border:1px solid}
+.tag.ok{color:var(--ok);border-color:var(--ok)}.tag.no{color:var(--no);border-color:var(--no)}.tag.warn{color:var(--warn);border-color:var(--warn);margin-left:4px}
+.muted{color:var(--soft);font-size:13px}
+.empty{padding:40px 10px;text-align:center;color:var(--soft)}
+@media(max-width:700px){
+  table,tbody,tr,td{display:block;width:100%}thead{display:none}
+  table{border:0;background:transparent}
+  tr{background:#fff;border:1px solid var(--line);margin-bottom:10px;padding:8px 4px}
+  td{border:0;padding:5px 12px}
+  td[data-l]:before{content:attr(data-l);display:block;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--soft)}
+}
+.hidden{display:none!important}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--primary);color:#fff;padding:12px 20px;border-radius:999px;font-size:14px;z-index:20}
+</style>
+</head>
+<body>
+
+<section id="login" class="login hidden">
+  <div class="brand">W &amp; T</div>
+  <p class="sub" style="margin:4px 0 14px">RSVP dashboard — admins only</p>
+  <input id="email" type="text" placeholder="Name or email" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false">
+  <input id="password" type="password" placeholder="Password" autocomplete="current-password">
+  <button id="loginBtn" class="btn">Sign in</button>
+  <p id="loginErr" class="err" role="alert"></p>
+  <a href="index.html" class="muted">&larr; Back to the invitation</a>
+</section>
+
+<div id="app" class="hidden">
+  <header class="top">
+    <a class="brand" href="index.html" style="text-decoration:none">W &amp; T</a>
+    <div class="who"><span id="who"></span><button id="logout" class="btn ghost" style="padding:8px 14px;min-height:36px">Sign out</button></div>
+  </header>
+  <main>
+    <h1>RSVP responses</h1>
+    <p class="sub" id="updated">Loading…</p>
+
+    <div class="stats">
+      <div class="stat"><b id="sReplies">0</b><span>Replies</span></div>
+      <div class="stat ok"><b id="sYes">0</b><span>Attending</span></div>
+      <div class="stat no"><b id="sNo">0</b><span>Declined</span></div>
+      <div class="stat ok"><b id="sGuests">0</b><span>Total guests</span></div>
+      <div class="stat warn"><b id="sRooms">0</b><span>Need rooms</span></div>
+    </div>
+
+    <div class="bar">
+      <input id="q" type="search" placeholder="Search name, email, dietary…" aria-label="Search">
+      <select id="filter" aria-label="Filter">
+        <option value="all">All replies</option>
+        <option value="yes">Attending</option>
+        <option value="no">Declined</option>
+        <option value="rooms">Need accommodation</option>
+        <option value="diet">Has dietary needs</option>
+      </select>
+      <label><input id="latest" type="checkbox" checked> Latest reply per email</label>
+      <span class="sp"></span>
+      <button id="refresh" class="btn ghost">Refresh</button>
+      <button id="csv" class="btn">Export CSV</button>
+    </div>
+
+    <table>
+      <thead><tr><th>Guest</th><th>Reply</th><th>Guests</th><th>Dietary</th><th>Received</th><th></th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div id="empty" class="empty hidden">No responses match.</div>
+  </main>
+</div>
+<div id="toast" class="toast hidden" role="status"></div>
+
+<script>
+/* Paste the SAME two values you used in enhance.js */
+var SUPABASE_URL = 'https://pndwlxjkzfofomeqihvl.supabase.co';
+var SUPABASE_ANON_KEY = 'sb_publishable_IErLPwKCt6OrNc4wQUMKNQ_J16yTQBS';
+/* Names without an @ are turned into  name@ADMIN_DOMAIN  (e.g. "wofai" -> wofai@wt-admin.app). */
+var ADMIN_DOMAIN = 'wt-admin.app';
+
+var $ = function (id) { return document.getElementById(id); };
+var session = null, all = [];
+
+function toast(msg) { var t = $('toast'); t.textContent = msg; t.classList.remove('hidden'); clearTimeout(toast.t); toast.t = setTimeout(function () { t.classList.add('hidden'); }, 2600); }
+function saveSession(s) { session = s; if (s) sessionStorage.setItem('rsvp_admin', JSON.stringify(s)); else sessionStorage.removeItem('rsvp_admin'); }
+function show(loggedIn) { $('login').classList.toggle('hidden', loggedIn); $('app').classList.toggle('hidden', !loggedIn); }
+
+function auth(grant, body) {
+  return fetch(SUPABASE_URL + '/auth/v1/token?grant_type=' + grant, {
+    method: 'POST', headers: { apikey: SUPABASE_ANON_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+  }).then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error_description || j.msg || 'Sign-in failed'); return j; }); });
+}
+function api(path, opts, retried) {
+  opts = opts || {};
+  opts.headers = Object.assign({ apikey: SUPABASE_ANON_KEY, Authorization: 'Bearer ' + session.access_token }, opts.headers || {});
+  return fetch(SUPABASE_URL + '/rest/v1/' + path, opts).then(function (r) {
+    if (r.status === 401 && !retried && session.refresh_token) {
+      return auth('refresh_token', { refresh_token: session.refresh_token }).then(function (j) { saveSession(pick(j)); return api(path, opts, true); });
+    }
+    if (r.status === 401) { saveSession(null); show(false); throw new Error('Session expired'); }
+    if (!r.ok) throw new Error('Request failed (' + r.status + ')');
+    return r.status === 204 ? null : r.json();
+  });
+}
+function loginId(v) { v = v.trim().toLowerCase().replace(/\s+/g, ''); return v.indexOf('@') > -1 ? v : v + '@' + ADMIN_DOMAIN; }
+function niceName(e) { var n = (e || '').split('@')[0]; return n.charAt(0).toUpperCase() + n.slice(1); }
+function pick(j) { return { access_token: j.access_token, refresh_token: j.refresh_token, email: (j.user && j.user.email) || (session && session.email) || '' }; }
+
+function load() {
+  $('updated').textContent = 'Loading…';
+  return api('rsvps?select=*&order=created_at.desc&limit=2000').then(function (rows) {
+    all = rows; $('updated').textContent = 'Updated ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); render();
+  }).catch(function (e) { $('updated').textContent = e.message; });
+}
+
+function view() {
+  var rows = all.slice();
+  if ($('latest').checked) { var seen = {}; rows = rows.filter(function (r) { var k = r.email.toLowerCase(); if (seen[k]) return false; seen[k] = 1; return true; }); }
+  return rows;
+}
+function render() {
+  var base = view();
+  var yes = base.filter(function (r) { return r.attendance === 'Joyfully accepts'; });
+  $('sReplies').textContent = base.length;
+  $('sYes').textContent = yes.length;
+  $('sNo').textContent = base.length - yes.length;
+  $('sGuests').textContent = yes.reduce(function (n, r) { return n + r.guests; }, 0);
+  $('sRooms').textContent = base.filter(function (r) { return r.needs_accommodation && r.attendance === 'Joyfully accepts'; }).length;
+
+  var q = $('q').value.trim().toLowerCase(), f = $('filter').value;
+  var list = base.filter(function (r) {
+    if (f === 'yes' && r.attendance !== 'Joyfully accepts') return false;
+    if (f === 'no' && r.attendance === 'Joyfully accepts') return false;
+    if (f === 'rooms' && !r.needs_accommodation) return false;
+    if (f === 'diet' && !r.dietary) return false;
+    return !q || (r.name + ' ' + r.email + ' ' + (r.dietary || '')).toLowerCase().indexOf(q) > -1;
+  });
+  var tb = $('rows'); tb.textContent = '';
+  list.forEach(function (r) {
+    var tr = document.createElement('tr');
+    function td(label, node) { var c = document.createElement('td'); c.setAttribute('data-l', label); if (typeof node === 'string') c.textContent = node; else if (node) c.appendChild(node); tr.appendChild(c); return c; }
+    var g = document.createElement('div'); var n = document.createElement('strong'); n.textContent = r.name; var m = document.createElement('div'); m.className = 'muted'; m.textContent = r.email; g.appendChild(n); g.appendChild(m); td('Guest', g);
+    var ok = r.attendance === 'Joyfully accepts'; var t = document.createElement('span'); t.className = 'tag ' + (ok ? 'ok' : 'no'); t.textContent = ok ? 'Attending' : 'Declined';
+    var w = document.createElement('span'); w.appendChild(t); if (r.needs_accommodation) { var a = document.createElement('span'); a.className = 'tag warn'; a.textContent = 'Needs room'; w.appendChild(a); } td('Reply', w);
+    td('Guests', ok ? String(r.guests) : '—'); td('Dietary', r.dietary || '—');
+    td('Received', new Date(r.created_at).toLocaleString([], { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }));
+    var b = document.createElement('button'); b.className = 'btn danger'; b.textContent = 'Delete'; b.onclick = function () { del(r); }; td('', b);
+    tb.appendChild(tr);
+  });
+  $('empty').classList.toggle('hidden', list.length > 0);
+  render.list = list;
+}
+function del(r) {
+  if (!confirm('Delete the reply from ' + r.name + '? This cannot be undone.')) return;
+  api('rsvps?id=eq.' + encodeURIComponent(r.id), { method: 'DELETE' }).then(function () { all = all.filter(function (x) { return x.id !== r.id; }); render(); toast('Deleted'); }).catch(function (e) { toast(e.message); });
+}
+function csvCell(v) { v = v == null ? '' : String(v); if (/^[=+\-@\t\r]/.test(v)) v = "'" + v; return '"' + v.replace(/"/g, '""') + '"'; }
+function exportCsv() {
+  var head = ['Name', 'Email', 'Reply', 'Guests', 'Dietary', 'Needs accommodation', 'Received'];
+  var lines = [head.map(csvCell).join(',')].concat((render.list || []).map(function (r) {
+    return [r.name, r.email, r.attendance, r.guests, r.dietary, r.needs_accommodation ? 'Yes' : 'No', r.created_at].map(csvCell).join(',');
+  }));
+  var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff' + lines.join('\n')], { type: 'text/csv' }));
+  a.download = 'rsvps-' + new Date().toISOString().slice(0, 10) + '.csv'; a.click();
+}
+
+$('loginBtn').onclick = function () {
+  var btn = $('loginBtn'); $('loginErr').textContent = ''; btn.disabled = true;
+  auth('password', { email: loginId($('email').value), password: $('password').value }).then(function (j) {
+    saveSession(pick(j)); $('password').value = ''; start();
+  }).catch(function (e) { $('loginErr').textContent = e.message; }).then(function () { btn.disabled = false; });
+};
+$('password').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('loginBtn').click(); });
+$('logout').onclick = function () { saveSession(null); all = []; show(false); };
+$('refresh').onclick = function () { load(); };
+$('csv').onclick = exportCsv;
+['q', 'filter', 'latest'].forEach(function (id) { $(id).addEventListener('input', render); $(id).addEventListener('change', render); });
+
+function start() { show(true); $('who').textContent = niceName(session.email); load(); }
+(function init() {
+  if (/your-|project-ref/i.test(SUPABASE_URL) || /your-/i.test(SUPABASE_ANON_KEY)) { show(false); $('loginErr').textContent = 'Add your Supabase URL and anon key at the top of admin.html.'; return; }
+  try { session = JSON.parse(sessionStorage.getItem('rsvp_admin') || 'null'); } catch (e) { session = null; }
+  session ? start() : show(false);
+})();
+</script>
+</body>
+</html>
