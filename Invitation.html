@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#696b50">
+  <meta name="description" content="A wedding invitation for Wofai and Tamunobelema, December 30, 2026, at Marina Resort, Calabar.">
+  <title>Wofai & Tamunobelema — Together, Always</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/theme.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="mobile.css">
+  <style>
+    /* Hero photo frame (replaces the line-art illustration) */
+    .hero-photo {
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 4 / 5;
+      margin: 1.5rem auto;
+      padding: 0;
+      overflow: hidden;
+      border-radius: 200px 200px 6px 6px; /* arched frame; use 6px for a plain rectangle */
+      border: 1px solid rgba(105, 107, 80, .35);
+      box-shadow: 0 0 0 8px var(--color-bg, #f7f4e8), 0 0 0 9px rgba(105, 107, 80, .25);
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 20%; /* keeps both faces in view */
+      display: block;
+    }
+
+    /* Venue photo (replaces the line-art illustration) */
+    .venue-photo {
+      width: 100%;
+      max-width: 420px;
+      margin: 1.5rem auto;
+      padding: 0;
+      overflow: hidden;
+      border-radius: 6px;
+      border: 1px solid rgba(247, 244, 232, .45);
+      box-shadow: 0 0 0 6px rgba(105, 107, 80, 1), 0 0 0 7px rgba(247, 244, 232, .3);
+    }
+    .venue-photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 600 / 350;
+      object-fit: cover;
+    }
+
+    /* Gifting note */
+    .note-lead {
+      font-family: var(--font-display, "Cormorant Garamond", serif);
+      font-style: italic;
+      font-size: 1.35rem;
+      margin: .5rem 0 .75rem;
+    }
+    .note-body {
+      max-width: 34rem;
+      margin: 0 auto 1.5rem;
+      line-height: 1.7;
+    }
+    .gift-card {
+      max-width: 22rem;
+      margin: 0 auto 1.5rem;
+      padding: 1.5rem 1.25rem;
+      border: 1px solid rgba(105, 107, 80, .35);
+      background: rgba(255, 255, 255, .45);
+      border-radius: 6px;
+    }
+    .gift-details { margin: 1rem 0; }
+    .gift-details > div { margin-bottom: .75rem; }
+    .gift-details dt {
+      font-family: "Manrope", sans-serif;
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      opacity: .7;
+    }
+    .gift-details dd {
+      margin: .15rem 0 0;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.25rem;
+    }
+    .acct-number {
+      font-size: 1.6rem !important;
+      letter-spacing: .12em;
+      color: #696b50;
+    }
+    .copy-button {
+      font-family: "Manrope", sans-serif;
+      font-size: .7rem;
+      letter-spacing: .18em;
+      padding: .75rem 1.25rem;
+      border: 1px solid #696b50;
+      background: transparent;
+      color: #696b50;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    .copy-button:hover, .copy-button:focus-visible { background: #696b50; color: #fff; }
+    .copy-status { min-height: 1.2em; margin: .6rem 0 0; font-size: .85rem; font-style: italic; }
+    .note-sign { margin-top: 1rem; }
+
+    /* Moments carousel */
+    .carousel { max-width: 440px; margin: 2rem auto 0; }
+    .carousel-frame { position: relative; }
+    .carousel-track {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      border-radius: 6px;
+      border: 1px solid rgba(105, 107, 80, .35);
+      box-shadow: 0 0 0 8px var(--color-bg, #f7f4e8), 0 0 0 9px rgba(105, 107, 80, .25);
+      -webkit-overflow-scrolling: touch;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    .carousel-track:focus-visible { outline: 2px solid #696b50; outline-offset: 10px; }
+    .carousel-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: center;
+      aspect-ratio: 4 / 5;
+      background: rgba(105, 107, 80, .08);
+    }
+    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; display: block; }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .7);
+      background: rgba(105, 107, 80, .6);
+      color: #fff;
+      font-size: 1.6rem;
+      line-height: 1;
+      padding: 0 0 .2rem;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: background .2s;
+    }
+    .carousel-btn:hover, .carousel-btn:focus-visible { background: rgba(105, 107, 80, .9); }
+    .carousel-prev { left: .6rem; }
+    .carousel-next { right: .6rem; }
+    .carousel-dots { display: flex; justify-content: center; gap: .55rem; margin-top: 1.75rem; }
+    .carousel-dot {
+      width: .6rem;
+      height: .6rem;
+      padding: 0;
+      border-radius: 50%;
+      border: 1px solid #696b50;
+      background: transparent;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .carousel-dot.is-active { background: #696b50; transform: scale(1.2); }
+    .carousel-count {
+      margin: .75rem 0 0;
+      text-align: center;
+      font-family: "Manrope", sans-serif;
+      font-size: .7rem;
+      letter-spacing: .2em;
+      opacity: .7;
+    }
+    @media (prefers-reduced-motion: reduce) { .carousel-track { scroll-behavior: auto; } }
+
+    /* Music toggle */
+    .music-btn {
+      position: fixed;
+      left: max(1rem, env(safe-area-inset-left, 0px));
+      bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+      z-index: 60;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      border: 1px solid rgba(247, 244, 232, .6);
+      background: #696b50;
+      color: #f7f4e8;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .22);
+      transition: transform .2s, background .2s;
+    }
+    .music-btn:hover, .music-btn:focus-visible { transform: scale(1.06); background: #585a41; }
+    .music-btn svg { width: 1.35rem; height: 1.35rem; display: block; }
+    .music-btn .icon-on { display: none; }
+    .music-btn.is-playing .icon-on { display: block; }
+    .music-btn.is-playing .icon-off { display: none; }
+    .music-btn::after {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 1px solid rgba(105, 107, 80, .55);
+      animation: music-pulse 2.4s ease-out infinite;
+    }
+    .music-btn.is-playing::after { animation: none; opacity: 0; }
+    @keyframes music-pulse { 0% { transform: scale(.9); opacity: .9; } 100% { transform: scale(1.35); opacity: 0; } }
+    .music-hint {
+      position: fixed;
+      left: max(4.6rem, calc(env(safe-area-inset-left, 0px) + 4.6rem));
+      bottom: max(1.3rem, calc(env(safe-area-inset-bottom, 0px) + .3rem));
+      z-index: 60;
+      padding: .35rem .7rem;
+      border-radius: 999px;
+      background: rgba(247, 244, 232, .95);
+      color: #696b50;
+      font-family: "Manrope", sans-serif;
+      font-size: .7rem;
+      letter-spacing: .12em;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+    .music-hint.show { opacity: 1; }
+    @media (prefers-reduced-motion: reduce) { .music-btn::after { animation: none; } }
+  </style>
+  <script>document.documentElement.classList.add("js")</script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[var(--color-bg)] text-[var(--color-text)] font-[var(--font-body)] antialiased">
+  <header class="header" id="top">
+    <a class="brand-script" href="#top" aria-label="Wofai and Tamunobelema">W <span>&</span> T</a>
+    <button class="menu-button" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span></button>
+    <nav class="navigation" id="main-nav" aria-label="Main navigation">
+      <a href="#story">Our story</a><a href="#details">The details</a><a href="#moments">Moments</a><a href="#rsvp">RSVP</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero paper-section" aria-labelledby="couple-name">
+      <div class="botanical botanical-top" aria-hidden="true">
+        <svg viewBox="0 0 120 260" fill="none">
+          <path d="M14 255C48 202 29 158 67 113 91 83 96 43 104 7M50 144C25 134 21 113 25 98c21 6 30 21 25 46ZM70 111c-3-23 7-40 24-46 6 20-3 37-24 46ZM35 194c-20-1-31-15-32-30 19 0 33 11 32 30ZM88 73c-1-22 10-35 24-39 2 18-7 32-24 39ZM21 226c-14-1-22-10-21-22 13 2 22 9 21 22Z" stroke="currentColor" stroke-width=".8" />
+          <path d="M45 167c14-8 19-19 18-32M76 123c12-6 18-16 20-29M30 208c12-7 16-15 16-25" stroke="currentColor" stroke-width=".7" />
+        </svg>
+      </div>
+      <div class="hero-inner">
+        <p class="eyebrow">TOGETHER WITH THEIR FAMILIES</p>
+        <p class="script-line">with joyful hearts</p>
+        <h1 id="couple-name">Wofai <span>&amp;</span><br>Tamunobelema</h1>
+        <div class="flourish" aria-hidden="true">❧ &nbsp; ❦ &nbsp; ❧</div>
+        <p class="hero-invite">joyfully invite you to celebrate<br>their wedding day</p>
+        <figure class="hero-landscape hero-photo">
+          <img src="img/hero.jpeg" alt="Wofai and Tamunobelema sharing a tender moment">
+        </figure>
+        <div class="wedding-date">
+          <p class="eyebrow">WEDDING DATE</p>
+          <p class="date-large">30 <i></i> 12 <i></i> 2026</p>
+          <p class="weekday">WEDNESDAY</p>
+          <p class="date-script">a day made more beautiful with you</p>
+          <div class="tiny-flourish" aria-hidden="true">⌁ ❦ ⌁</div>
+        </div>
+      </div>
+      <div class="botanical botanical-bottom" aria-hidden="true"><svg viewBox="0 0 120 260" fill="none">
+          <path d="M14 255C48 202 29 158 67 113 91 83 96 43 104 7M50 144C25 134 21 113 25 98c21 6 30 21 25 46ZM70 111c-3-23 7-40 24-46 6 20-3 37-24 46ZM35 194c-20-1-31-15-32-30 19 0 33 11 32 30ZM88 73c-1-22 10-35 24-39 2 18-7 32-24 39ZM21 226c-14-1-22-10-21-22 13 2 22 9 21 22Z" stroke="currentColor" stroke-width=".8" />
+        </svg></div>
+    </section>
+
+    <section class="venue-section olive-section" id="venue">
+      <p class="eyebrow">THE PLACE</p>
+      <h2>Where we say <em>“I do.”</em></h2>
+      <p class="venue-name">Marina Resort</p>
+      <p class="venue-location">CALABAR, CROSS RIVER STATE</p>
+      <figure class="venue-photo">
+        <img src="img/venue.png" alt="Marina Resort, Calabar, with its green-roofed pavilion and the river beyond">
+      </figure>
+      <p class="venue-address">Marina Resort, Calabar<br>Cross River State, Nigeria</p>
+      <a class="outline-link" href="https://maps.google.com/?q=Marina+Resort+Calabar+Nigeria" target="_blank" rel="noreferrer">VIEW MAP <span>↗</span></a>
+      <p class="venue-note">Reception to follow immediately after the ceremony.</p>
+    </section>
+
+    <section class="details-section paper-section" id="details">
+      <div class="section-intro">
+        <p class="eyebrow">THE DAY AT A GLANCE</p>
+        <h2>A little more <em>about the day.</em></h2>
+        <p>We can't wait to gather with you in Calabar. Here are a few thoughtful notes to help you plan.</p>
+      </div>
+      <div class="detail-list">
+        <article class="detail-item"><span class="detail-icon" aria-hidden="true">♧</span>
+          <div>
+            <p class="eyebrow">DRESS CODE</p>
+            <h3>Come dressed to celebrate</h3>
+            <p>We invite you to dress in the colours of the day: ivory, cream, sage green and burgundy.</p>
+          </div>
+        </article>
+        <article class="detail-item"><span class="detail-icon" aria-hidden="true">⌂</span>
+          <div>
+            <p class="eyebrow">ACCOMMODATION</p>
+            <h3>A place to rest</h3>
+            <p>If you need accommodation or have special arrangements, please message our wedding coordinator, Patience Igbagri, on WhatsApp.</p>
+          </div>
+        </article>
+        <article class="detail-item"><span class="detail-icon" aria-hidden="true">⌑</span>
+          <div>
+            <p class="eyebrow">GETTING THERE</p>
+            <h3>Meet us in Calabar</h3>
+            <p>Marina Resort is in Calabar, Cross River State. Please allow time for your journey and arrive by 11:30 AM.</p>
+          </div>
+        </article>
+      </div>
+      <div class="planner-card" id="planner">
+        <p class="eyebrow">WEDDING COORDINATOR</p>
+        <h3>Patience Igbagri</h3>
+        <p>For accommodation, special arrangements or any question about the day, reach out directly.</p>
+        <a class="planner-phone" href="tel:+2347057370591">+234 705 737 0591</a>
+        <div class="planner-actions">
+          <a class="wa-link" href="https://wa.me/2347057370591?text=Hello%20Patience%20Planner%2C%20I%27m%20a%20guest%20at%20Wofai%20%26%20Tamunobelema%27s%20wedding%20%2830%20Dec%202026%29%20and%20I%20have%20a%20question." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.95L2 22l5.2-1.36A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.08.8.82-3-.2-.31a8.2 8.2 0 1 1 6.96 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.16.25-.63.8-.78.97-.14.16-.28.18-.53.06-.25-.13-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.1-.5.12-.11.25-.28.37-.42.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03 0 1.2.87 2.35 1 2.51.12.17 1.7 2.6 4.12 3.65.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28Z"/></svg> Chat on WhatsApp</a>
+          <a class="call-link" href="tel:+2347057370591">Call</a>
+        </div>
+      </div>
+      <div class="note-card" id="gifts">
+        <div class="note-sprig" aria-hidden="true">❧</div>
+        <p class="eyebrow">A LITTLE NOTE</p>
+        <p class="note-lead">Your presence is the greatest gift of all.</p>
+        <p class="note-body">For those who wish to honour us with a thoughtful gift, we have created a little space to make gifting easy. Every gesture of love and kindness is deeply appreciated.</p>
+
+        <div class="gift-card">
+          <p class="eyebrow">MONETARY GIFTS · BANK TRANSFER</p>
+          <dl class="gift-details">
+            <div><dt>Account name</dt><dd>Wofai Ojah</dd></div>
+            <div><dt>Bank</dt><dd>GTBank</dd></div>
+            <div><dt>Account number</dt><dd class="acct-number" id="acct-number">0158960712</dd></div>
+          </dl>
+          <button class="copy-button" type="button" id="copy-acct" data-number="0158960712">COPY ACCOUNT NUMBER</button>
+          <p class="copy-status" id="copy-status" aria-live="polite"></p>
+        </div>
+
+        <p class="note-sign">With love,<br><em>Wofai &amp; Tamunobelema</em></p>
+      </div>
+    </section>
+
+    <!-- <section class="story-section paper-section" id="story">
+      <div class="story-copy">
+        <p class="eyebrow">OUR STORY</p>
+        <h2>Wofai <span>&amp;</span><br>Tamunobelema</h2>
+        <p class="story-script">a love written in the stars</p>
+        <p>Somewhere along the way, two lives became one beautiful story. Now, surrounded by the people who mean the most, we would love to celebrate the beginning of our next chapter with you.</p>
+        <div class="flourish" aria-hidden="true">❧ &nbsp; ❦ &nbsp; ❧</div>
+      </div>
+      <figure class="story-photo"><img src="img/8.png" alt="A couple celebrating their wedding day outdoors"><span class="photo-caption">THE BEGINNING OF FOREVER</span></figure>
+      <div class="memory-strip"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=600&q=80" alt="Wedding table set for a celebration">
+        <div class="memory-note"><span class="script-line">For the days ahead</span>
+          <p>All our love,<br><em>Wofai &amp; Tamunobelema</em></p>
+        </div><img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=600&q=80" alt="Flowers and details prepared for a wedding">
+      </div>
+      <div class="forever-copy">
+        <p class="eyebrow">FOREVER &amp; ALWAYS</p>
+        <h3>Next chapter, <em>together.</em></h3>
+        <p>We are so grateful to have you in our lives.<br>Thank you for being part of our story.</p>
+      </div>
+      <div class="quote-band"><span aria-hidden="true">“</span>
+        <p>Two souls, one heart.</p><span class="quote-rule"></span>
+      </div>
+    </section> -->
+
+    <section class="moments-section paper-section" id="moments">
+      <p class="eyebrow">THE LITTLE MOMENTS</p>
+      <h2>Made for <em>remembering.</em></h2>
+      <div class="carousel" id="moments-carousel" role="region" aria-roledescription="carousel" aria-label="Wedding photo gallery">
+        <div class="carousel-frame">
+          <ul class="carousel-track" id="carousel-track" tabindex="0" aria-live="off"></ul>
+          <button type="button" class="carousel-btn carousel-prev" aria-label="Previous photo">‹</button>
+          <button type="button" class="carousel-btn carousel-next" aria-label="Next photo">›</button>
+        </div>
+        <div class="carousel-dots" id="carousel-dots"></div>
+        <p class="carousel-count" aria-hidden="true"><span id="carousel-current">1</span> / <span id="carousel-total">1</span></p>
+      </div>
+    </section>
+
+    <section class="rsvp-section" id="rsvp">
+      <div class="rsvp-heading">
+        <p class="eyebrow">A SEAT IS WAITING FOR YOU</p>
+        <h2>Kindly <em>RSVP.</em></h2>
+        <p>Please reply by Dec 10, 2026.<br>We hope you can be there.</p>
+        <div class="rsvp-flourish">W <span>&amp;</span> T</div>
+      </div>
+      <form class="rsvp-form" id="rsvp-form">
+        <label for="guest-name">YOUR NAME</label><input id="guest-name" name="name" type="text" placeholder="Full name" autocomplete="name" required>
+        <label for="guest-email">EMAIL ADDRESS</label><input id="guest-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+        <fieldset>
+          <legend>YOUR REPLY</legend><label class="choice"><input type="radio" name="attendance" value="Joyfully accepts" required><span></span>Accepts with pleasure</label><label class="choice"><input type="radio" name="attendance" value="Regretfully declines"><span></span>Declines with regret</label>
+        </fieldset>
+        <label for="guest-count">NUMBER OF GUESTS</label><select id="guest-count" name="guests">
+          <option value="1">1 guest</option>
+          <option value="2">2 guests</option>
+          <option value="3">3 guests</option>
+          <option value="4">4 guests</option>
+        </select>
+        <label for="dietary">DIETARY REQUIREMENTS <small>(OPTIONAL)</small></label><input id="dietary" name="dietary" type="text" placeholder="Let us know about any allergies">
+        <label class="choice check"><input type="checkbox" name="accommodation" value="yes"><span></span>I need help with accommodation</label>
+        <button class="submit-button" type="submit">SEND YOUR RSVP <span>↗</span></button>
+        <p class="form-status" id="form-status" aria-live="polite"></p>
+        <p class="rsvp-help">Your reply is saved securely and shared with our coordinator, Patience Igbagri. Prefer to talk? <a href="tel:+2347057370591">Call her</a>.</p>
+      </form>
+    </section>
+
+    <section class="thank-you paper-section">
+      <div class="thank-branch" aria-hidden="true">❧</div>
+      <p class="brand-script">W <span>&</span> T</p>
+      <p class="eyebrow">WITH ALL OUR LOVE</p>
+      <h2>Thank <em>you.</em></h2>
+      <div class="tiny-flourish">⌁ ❦ ⌁</div>
+      <p class="signature">Wofai &amp; Tamunobelema</p>
+      <p class="footer-date">DECEMBER 30, 2026 &nbsp; · &nbsp; CALABAR, NIGERIA</p>
+    </section>
+  </main>
+  <footer class="footer"><a href="#top">BACK TO TOP ↑</a><span>MADE WITH LOVE · W &amp; T · 2026 · <a href="admin.html" rel="nofollow">ADMIN</a></span><a href="#rsvp">RSVP ↗</a></footer>
+  <a class="wa-fab" href="https://wa.me/2347057370591?text=Hello%20Patience%20Planner%2C%20I%27m%20a%20guest%20at%20Wofai%20%26%20Tamunobelema%27s%20wedding%20%2830%20Dec%202026%29%20and%20I%20have%20a%20question." target="_blank" rel="noopener" aria-label="Chat with the wedding coordinator on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.95L2 22l5.2-1.36A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.08.8.82-3-.2-.31a8.2 8.2 0 1 1 6.96 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.16.25-.63.8-.78.97-.14.16-.28.18-.53.06-.25-.13-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.1-.5.12-.11.25-.28.37-.42.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03 0 1.2.87 2.35 1 2.51.12.17 1.7 2.6 4.12 3.65.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28Z"/></svg><span>Planner</span></a>
+
+  <script>
+    /* Copy account number */
+    (function () {
+      var btn = document.getElementById("copy-acct");
+      var status = document.getElementById("copy-status");
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var num = btn.getAttribute("data-number");
+        function done(msg) {
+          status.textContent = msg;
+          setTimeout(function () { status.textContent = ""; }, 2500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(num).then(
+            function () { done("Account number copied. Thank you! ♡"); },
+            function () { done("Please copy the number manually."); }
+          );
+        } else {
+          done("Please copy the number manually.");
+        }
+      });
+    })();
+  </script>
+  <audio id="bg-music" src="audio/song.mp3" loop preload="none"></audio>
+  <button class="music-btn" id="music-toggle" type="button" aria-pressed="false" aria-label="Play music">
+    <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="m16 9 5 6m0-6-5 6"/></svg>
+    <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+  </button>
+  <span class="music-hint" id="music-hint" aria-live="polite"></span>
+
+  <script>
+    /* Moments carousel: seamless infinite loop, auto-slides, photos from img2 */
+    (function () {
+      /* EDIT THIS LIST to match the file names in your img2 folder.
+         Any file that can't be found is skipped automatically. */
+      var PHOTOS = [
+        "img2/1.png", "img2/2.png", "img2/3.png", "img2/4.png",
+        "img2/5.png", "img2/6.png", "img2/7.png", "img2/8.png",
+        "img2/9.png", "img2/10.png"
+      ];
+      var INTERVAL = 4000; /* ms between slides */
+
+      var root = document.getElementById("moments-carousel");
+      var track = document.getElementById("carousel-track");
+      var dotsBox = document.getElementById("carousel-dots");
+      var current = document.getElementById("carousel-current");
+      var total = document.getElementById("carousel-total");
+      if (!root || !track) return;
+      var prev = root.querySelector(".carousel-prev");
+      var next = root.querySelector(".carousel-next");
+      var n = 0;          /* number of real photos */
+      var pos = 1;        /* DOM position: 0 = clone of last, 1..n = real, n+1 = clone of first */
+      var timer = null, hovering = false, touching = false, settleT = null;
+
+      function makeSlide(src, i, isClone) {
+        var li = document.createElement("li");
+        li.className = "carousel-slide";
+        if (isClone) li.setAttribute("aria-hidden", "true");
+        var img = new Image();
+        img.alt = isClone ? "" : "Wedding moment " + (i + 1);
+        img.decoding = "async";
+        img.src = src;
+        li.appendChild(img);
+        return li;
+      }
+
+      function jump(p) {            /* instant, invisible reposition */
+        pos = p;
+        track.style.scrollBehavior = "auto";
+        track.style.scrollSnapType = "none";
+        track.scrollLeft = p * track.clientWidth;
+        void track.offsetWidth;
+        track.style.scrollSnapType = "";
+        track.style.scrollBehavior = "";
+      }
+      function slideTo(p) {         /* animated */
+        track.scrollTo({ left: p * track.clientWidth, behavior: "smooth" });
+      }
+      function realIndex() { return ((pos - 1) % n + n) % n; }
+      function updateUI() {
+        var r = realIndex();
+        for (var d = 0; d < dotsBox.children.length; d++) dotsBox.children[d].classList.toggle("is-active", d === r);
+        current.textContent = r + 1;
+      }
+      function onScroll() {
+        if (!track.clientWidth) return;
+        pos = Math.round(track.scrollLeft / track.clientWidth);
+        updateUI();
+        clearTimeout(settleT);
+        settleT = setTimeout(function () {       /* once motion stops, hop off the clones */
+          if (pos <= 0) jump(n);
+          else if (pos >= n + 1) jump(1);
+        }, 120);
+      }
+
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+      function start() {
+        stop();
+        if (n < 2 || hovering || touching || document.hidden) return;
+        timer = setInterval(function () { slideTo(pos + 1); }, INTERVAL);
+      }
+      function go(delta) { slideTo(pos + delta); start(); }
+
+      function build(good) {
+        n = good.length;
+        if (!n) { root.style.display = "none"; return; }
+        total.textContent = n;
+        if (n > 1) track.appendChild(makeSlide(good[n - 1], n - 1, true));
+        good.forEach(function (src, i) { track.appendChild(makeSlide(src, i, false)); });
+        if (n > 1) track.appendChild(makeSlide(good[0], 0, true));
+        for (var i = 0; i < n; i++) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "carousel-dot";
+          b.setAttribute("aria-label", "Go to photo " + (i + 1));
+          (function (k) { b.addEventListener("click", function () { slideTo(k + 1); start(); }); })(i);
+          dotsBox.appendChild(b);
+        }
+        if (n < 2) { prev.style.display = next.style.display = "none"; dotsBox.style.display = "none"; }
+        jump(n > 1 ? 1 : 0);
+        updateUI();
+
+        prev.addEventListener("click", function () { go(-1); });
+        next.addEventListener("click", function () { go(1); });
+        track.addEventListener("scroll", function () { window.requestAnimationFrame(onScroll); }, { passive: true });
+        track.addEventListener("keydown", function (e) {
+          if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
+          if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
+        });
+        root.addEventListener("mouseenter", function () { hovering = true; stop(); });
+        root.addEventListener("mouseleave", function () { hovering = false; start(); });
+        root.addEventListener("touchstart", function () { touching = true; stop(); }, { passive: true });
+        root.addEventListener("touchend", function () { touching = false; setTimeout(start, 1500); }, { passive: true });
+        document.addEventListener("visibilitychange", start);
+        window.addEventListener("resize", function () { jump(pos); });
+        start();
+      }
+
+      /* Preload every photo first so missing files are dropped cleanly */
+      var results = new Array(PHOTOS.length), done = 0;
+      PHOTOS.forEach(function (src, i) {
+        var t = new Image();
+        function fin(ok) {
+          results[i] = ok ? src : null;
+          if (++done === PHOTOS.length) build(results.filter(Boolean));
+        }
+        t.onload = function () { fin(true); };
+        t.onerror = function () { fin(false); };
+        t.src = src;
+      });
+    })();
+
+    /* Background music: off (muted) by default, tap the icon to play */
+    (function () {
+      var audio = document.getElementById("bg-music");
+      var btn = document.getElementById("music-toggle");
+      var hint = document.getElementById("music-hint");
+      if (!audio || !btn) return;
+      audio.volume = 0.6;
+      var hintT = null;
+
+      function say(msg) {
+        hint.textContent = msg;
+        hint.classList.add("show");
+        clearTimeout(hintT);
+        hintT = setTimeout(function () { hint.classList.remove("show"); }, 2200);
+      }
+      function setState(on) {
+        btn.classList.toggle("is-playing", on);
+        btn.setAttribute("aria-pressed", on ? "true" : "false");
+        btn.setAttribute("aria-label", on ? "Mute music" : "Play music");
+      }
+      btn.addEventListener("click", function () {
+        if (audio.paused) {
+          var p = audio.play();
+          setState(true);
+          say("Music on");
+          if (p && p.catch) p.catch(function () { setState(false); say("Music unavailable"); });
+        } else {
+          audio.pause();
+          setState(false);
+          say("Music muted");
+        }
+      });
+      audio.addEventListener("error", function () { setState(false); });
+      setState(false);
+    })();
+  </script>
+  <script src="enhance.js"></script>
+  <script src="/app.js"></script>
+</body>
+
+</html>

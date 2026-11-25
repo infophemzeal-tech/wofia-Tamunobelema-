@@ -3,210 +3,173 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#696b50">
-  <meta name="description" content="A wedding invitation for Wofai and Tamunobelema, December 30, 2026, at Marina Resort, Calabar.">
-  <title>Wofai & Tamunobelema — Together, Always</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f4e8">
+  <meta name="description" content="You are specially invited to the wedding of Wofai and Tamunobelema, December 30, 2026, at Marina Resort, Calabar.">
+  <title>Wofai & Tamunobelema — You are specially invited</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/theme.css">
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="mobile.css">
+  <link rel="prefetch" href="invitation.html">
   <style>
-    /* Hero illustration (replaces the stock hero photo) */
-    .hero-landscape--art {
-      padding: 2.5rem 1.5rem;
-      background: linear-gradient(180deg, rgba(105, 107, 80, .12), transparent);
+    /* Splash screen */
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #f7f4e8; }
+    .splash { display: flex; }
+    .splash {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background: #f7f4e8;
       color: #696b50;
+      overflow: hidden;
+      transition: transform 1.1s cubic-bezier(.77, 0, .18, 1), opacity .9s ease .2s;
     }
-    .hero-landscape--art svg { width: 100%; height: auto; display: block; }
+    .splash::before {              /* soft glow behind the names */
+      content: "";
+      position: absolute;
+      width: min(120vw, 640px);
+      aspect-ratio: 1;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -54%);
+      background: radial-gradient(circle, rgba(105, 107, 80, .14), rgba(105, 107, 80, 0) 65%);
+      animation: splash-breathe 6s ease-in-out infinite;
+    }
+    .splash-sprig {
+      position: absolute;
+      width: 90px;
+      color: #696b50;
+      opacity: 0;
+      animation: splash-fade 1.6s ease .3s forwards;
+    }
+    .splash-sprig-a { top: 6%; left: 8%; }
+    .splash-sprig-b { bottom: 6%; right: 8%; transform: rotate(180deg); }
+    .splash-names {
+      position: relative;
+      margin: 0;
+      font-family: "Great Vibes", cursive;
+      font-weight: 400;
+      font-size: clamp(2.6rem, 11vw, 4.6rem);
+      line-height: 1.15;
+      color: #3f402e;
+    }
+    .splash-names span { display: block; opacity: 0; animation: splash-rise 1.2s cubic-bezier(.2, .7, .2, 1) forwards; }
+    .splash-names .n1 { animation-delay: .4s; }
+    .splash-names .amp { color: #a9a07f; font-size: .7em; line-height: 1; animation-delay: .8s; }
+    .splash-names .n2 { animation-delay: 1.2s; }
+    .splash-rule {
+      position: relative;
+      width: 0;
+      height: 1px;
+      margin: 1.75rem auto 1.5rem;
+      background: #a9a07f;
+      animation: splash-line 1.2s ease 1.7s forwards;
+    }
+    .splash-invited {
+      position: relative;
+      margin: 0 0 2.5rem;
+      font-family: "Manrope", sans-serif;
+      font-size: .78rem;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: splash-rise 1s ease 2s forwards;
+    }
+    .splash-open {
+      position: relative;
+      overflow: hidden;
+      font-family: "Manrope", sans-serif;
+      font-weight: 500;
+      font-size: .78rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: #fff;
+      background: #696b50;
+      border: 0;
+      border-radius: 999px;
+      padding: 1.15rem 2.6rem;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(105, 107, 80, .35);
+      opacity: 0;
+      animation: splash-rise 1s ease 2.4s forwards, splash-pulse 2.6s ease-in-out 3.6s infinite;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .splash-open::after {          /* shimmer sweep */
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 40%;
+      left: -60%;
+      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .45), transparent);
+      transform: skewX(-20deg);
+      animation: splash-shimmer 3.2s ease-in-out 3.2s infinite;
+    }
+    .splash-open:hover, .splash-open:focus-visible { transform: translateY(-2px) scale(1.04); box-shadow: 0 16px 34px rgba(105, 107, 80, .45); }
+    .splash-open:active { transform: scale(.97); }
+    .splash-open .arrow { display: inline-block; margin-left: .5rem; transition: transform .25s; }
+    .splash-open:hover .arrow { transform: translate(3px, -3px); }
+
+    /* Opening: names drift up and fade, the whole screen lifts away */
+    .splash.is-opening { opacity: 0; pointer-events: none; transition: opacity .9s ease .25s; }
+    .splash.is-opening .splash-names,
+    .splash.is-opening .splash-rule,
+    .splash.is-opening .splash-invited,
+    .splash.is-opening .splash-open { transition: transform .9s ease, opacity .6s ease; transform: translateY(-24px) scale(1.04); opacity: 0; }
+
+    @keyframes splash-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    @keyframes splash-fade { to { opacity: .22; } }
+    @keyframes splash-line { to { width: 72px; } }
+    @keyframes splash-breathe { 0%, 100% { transform: translate(-50%, -54%) scale(1); } 50% { transform: translate(-50%, -54%) scale(1.08); } }
+    @keyframes splash-pulse {
+      0%, 100% { box-shadow: 0 12px 28px rgba(105, 107, 80, .35), 0 0 0 0 rgba(105, 107, 80, .35); }
+      50% { box-shadow: 0 12px 28px rgba(105, 107, 80, .35), 0 0 0 14px rgba(105, 107, 80, 0); }
+    }
+    @keyframes splash-shimmer { 0% { left: -60%; } 55%, 100% { left: 130%; } }
+    @media (prefers-reduced-motion: reduce) {
+      .splash, .splash * { animation-duration: .01s !important; animation-delay: 0s !important; transition-duration: .3s !important; }
+    }
   </style>
-  <script>document.documentElement.classList.add("js")</script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    /* Old links like index.html#rsvp go straight to the invitation */
+    if (location.hash) location.replace("invitation.html" + location.hash);
+  </script>
 </head>
 
-<body class="bg-[var(--color-bg)] text-[var(--color-text)] font-[var(--font-body)] antialiased">
-  <header class="header" id="top">
-    <a class="brand-script" href="#top" aria-label="Wofai and Tamunobelema">W <span>&</span> T</a>
-    <button class="menu-button" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span></button>
-    <nav class="navigation" id="main-nav" aria-label="Main navigation">
-      <a href="#story">Our story</a><a href="#details">The details</a><a href="#moments">Moments</a><a href="#rsvp">RSVP</a>
-    </nav>
-  </header>
+<body>
+  <div class="splash" id="splash" role="dialog" aria-modal="true" aria-label="Wedding invitation welcome">
+    <svg class="splash-sprig splash-sprig-a" viewBox="0 0 120 260" fill="none" aria-hidden="true"><path d="M14 255C48 202 29 158 67 113 91 83 96 43 104 7M50 144C25 134 21 113 25 98c21 6 30 21 25 46ZM70 111c-3-23 7-40 24-46 6 20-3 37-24 46ZM35 194c-20-1-31-15-32-30 19 0 33 11 32 30ZM88 73c-1-22 10-35 24-39 2 18-7 32-24 39ZM21 226c-14-1-22-10-21-22 13 2 22 9 21 22Z" stroke="currentColor" stroke-width="1.2"/></svg>
+    <svg class="splash-sprig splash-sprig-b" viewBox="0 0 120 260" fill="none" aria-hidden="true"><path d="M14 255C48 202 29 158 67 113 91 83 96 43 104 7M50 144C25 134 21 113 25 98c21 6 30 21 25 46ZM70 111c-3-23 7-40 24-46 6 20-3 37-24 46ZM35 194c-20-1-31-15-32-30 19 0 33 11 32 30ZM88 73c-1-22 10-35 24-39 2 18-7 32-24 39ZM21 226c-14-1-22-10-21-22 13 2 22 9 21 22Z" stroke="currentColor" stroke-width="1.2"/></svg>
+    <h2 class="splash-names"><span class="n1">Wofai</span><span class="amp">&amp;</span><span class="n2">Tamunobelema</span></h2>
+    <div class="splash-rule" aria-hidden="true"></div>
+    <p class="splash-invited">You are specially invited</p>
+    <button class="splash-open" id="splash-open" type="button">Open invitation <span class="arrow" aria-hidden="true">↗</span></button>
+  </div>
 
-  <main>
-    <section class="hero paper-section" aria-labelledby="couple-name">
-      <div class="botanical botanical-top" aria-hidden="true">
-        <svg viewBox="0 0 120 260" fill="none">
-          <path d="M14 255C48 202 29 158 67 113 91 83 96 43 104 7M50 144C25 134 21 113 25 98c21 6 30 21 25 46ZM70 111c-3-23 7-40 24-46 6 20-3 37-24 46ZM35 194c-20-1-31-15-32-30 19 0 33 11 32 30ZM88 73c-1-22 10-35 24-39 2 18-7 32-24 39ZM21 226c-14-1-22-10-21-22 13 2 22 9 21 22Z" stroke="currentColor" stroke-width=".8" />
-          <path d="M45 167c14-8 19-19 18-32M76 123c12-6 18-16 20-29M30 208c12-7 16-15 16-25" stroke="currentColor" stroke-width=".7" />
-        </svg>
-      </div>
-      <div class="hero-inner">
-        <p class="eyebrow">TOGETHER WITH THEIR FAMILIES</p>
-        <p class="script-line">with joyful hearts</p>
-        <h1 id="couple-name">Wofai <span>&amp;</span><br>Tamunobelema</h1>
-        <div class="flourish" aria-hidden="true">❧ &nbsp; ❦ &nbsp; ❧</div>
-        <p class="hero-invite">joyfully invite you to celebrate<br>their wedding day</p>
-        <figure class="hero-landscape hero-landscape--art" aria-hidden="true">
-          <svg viewBox="0 0 260 92" fill="none">
-            <path d="M22 74h216M44 73V48l30-20 30 20v25m-48-1V51h36v22m10-25h76v47m-68-46V36l28-18 29 18v55m-48-28h14v18h-14zm29 0h14v18h-14zm29 0h14v18h-14zm-42-20h12v13h-12zm-53-3h12v13H63zm27 0h12v13H90zM26 73V52m-6 0 6-21 6 21m158 21V39m-6 0 6-22 7 22m13 34V51m-6 0 6-18 6 18" stroke="currentColor" stroke-width=".8" />
-            <path d="M12 83h236M0 88h260" stroke="currentColor" stroke-width=".6" />
-          </svg>
-        </figure>
-        <div class="wedding-date">
-          <p class="eyebrow">WEDDING DATE</p>
-          <p class="date-large">30 <i></i> 12 <i></i> 2026</p>
-          <p class="weekday">WEDNESDAY</p>
-          <p class="date-script">a day made more beautiful with you</p>
-          <div class="tiny-flourish" aria-hidden="true">⌁ ❦ ⌁</div>
-        </div>
-      </div>
-      <div class="botanical botanical-bottom" aria-hidden="true"><svg viewBox="0 0 120 260" fill="none">
-          <path d="M14 255C48 202 29 158 67 113 91 83 96 43 104 7M50 144C25 134 21 113 25 98c21 6 30 21 25 46ZM70 111c-3-23 7-40 24-46 6 20-3 37-24 46ZM35 194c-20-1-31-15-32-30 19 0 33 11 32 30ZM88 73c-1-22 10-35 24-39 2 18-7 32-24 39ZM21 226c-14-1-22-10-21-22 13 2 22 9 21 22Z" stroke="currentColor" stroke-width=".8" />
-        </svg></div>
-    </section>
+  <script>
+    (function () {
+      var splash = document.getElementById("splash");
+      var btn = document.getElementById("splash-open");
+      var TARGET = "invitation.html";
+      var go = false;
+      setTimeout(function () { btn.focus({ preventScroll: true }); }, 2600);
 
-    <section class="venue-section olive-section" id="venue">
-      <p class="eyebrow">THE PLACE</p>
-      <h2>Where we say <em>“I do.”</em></h2>
-      <p class="venue-name">Marina Resort</p>
-      <p class="venue-location">CALABAR, CROSS RIVER STATE</p>
-      <div class="venue-illustration" aria-hidden="true">
-        <svg viewBox="0 0 260 92" fill="none">
-          <path d="M22 74h216M44 73V48l30-20 30 20v25m-48-1V51h36v22m10-25h76v47m-68-46V36l28-18 29 18v55m-48-28h14v18h-14zm29 0h14v18h-14zm29 0h14v18h-14zm-42-20h12v13h-12zm-53-3h12v13H63zm27 0h12v13H90zM26 73V52m-6 0 6-21 6 21m158 21V39m-6 0 6-22 7 22m13 34V51m-6 0 6-18 6 18" stroke="currentColor" stroke-width=".8" />
-          <path d="M12 83h236M0 88h260" stroke="currentColor" stroke-width=".6" />
-        </svg>
-      </div>
-      <p class="venue-address">Marina Resort, Calabar<br>Cross River State, Nigeria</p>
-      <a class="outline-link" href="https://maps.google.com/?q=Marina+Resort+Calabar+Nigeria" target="_blank" rel="noreferrer">VIEW MAP <span>↗</span></a>
-      <p class="venue-note">Reception to follow immediately after the ceremony.</p>
-    </section>
+      btn.addEventListener("click", function () {
+        if (go) return;
+        go = true;
+        splash.classList.add("is-opening");
+        setTimeout(function () { window.location.href = TARGET; }, 1000);
+      });
 
-    <section class="details-section paper-section" id="details">
-      <div class="section-intro">
-        <p class="eyebrow">THE DAY AT A GLANCE</p>
-        <h2>A little more <em>about the day.</em></h2>
-        <p>We can't wait to gather with you in Calabar. Here are a few thoughtful notes to help you plan.</p>
-      </div>
-      <div class="detail-list">
-        <article class="detail-item"><span class="detail-icon" aria-hidden="true">♧</span>
-          <div>
-            <p class="eyebrow">DRESS CODE</p>
-            <h3>Come dressed to celebrate</h3>
-            <p>We invite you to dress in the colours of the day: ivory, cream, sage green and burgundy.</p>
-          </div>
-        </article>
-        <article class="detail-item"><span class="detail-icon" aria-hidden="true">⌂</span>
-          <div>
-            <p class="eyebrow">ACCOMMODATION</p>
-            <h3>A place to rest</h3>
-            <p>If you need accommodation or have special arrangements, please message our wedding coordinator, Patience Igbagri, on WhatsApp.</p>
-            <a class="wa-link" href="https://wa.me/2347057370591?text=Hello%20Patience%20Planner%2C%20I%27m%20a%20guest%20at%20Wofai%20%26%20Tamunobelema%27s%20wedding%20%2830%20Dec%202026%2C%20Marina%20Resort%2C%20Calabar%29%20and%20I%20need%20help%20with%20accommodation." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.95L2 22l5.2-1.36A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.08.8.82-3-.2-.31a8.2 8.2 0 1 1 6.96 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.16.25-.63.8-.78.97-.14.16-.28.18-.53.06-.25-.13-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.1-.5.12-.11.25-.28.37-.42.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03 0 1.2.87 2.35 1 2.51.12.17 1.7 2.6 4.12 3.65.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28Z"/></svg> Accommodation help</a>
-          </div>
-        </article>
-        <article class="detail-item"><span class="detail-icon" aria-hidden="true">⌑</span>
-          <div>
-            <p class="eyebrow">GETTING THERE</p>
-            <h3>Meet us in Calabar</h3>
-            <p>Marina Resort is in Calabar, Cross River State. Please allow time for your journey and arrive by 11:30 AM.</p>
-          </div>
-        </article>
-      </div>
-      <div class="planner-card" id="planner">
-        <p class="eyebrow">WEDDING COORDINATOR</p>
-        <h3>Patience Igbagri</h3>
-        <p>For accommodation, special arrangements or any question about the day, reach out directly.</p>
-        <a class="planner-phone" href="tel:+2347057370591">+234 705 737 0591</a>
-        <div class="planner-actions">
-          <a class="wa-link" href="https://wa.me/2347057370591?text=Hello%20Patience%20Planner%2C%20I%27m%20a%20guest%20at%20Wofai%20%26%20Tamunobelema%27s%20wedding%20%2830%20Dec%202026%29%20and%20I%20have%20a%20question." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.95L2 22l5.2-1.36A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.08.8.82-3-.2-.31a8.2 8.2 0 1 1 6.96 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.16.25-.63.8-.78.97-.14.16-.28.18-.53.06-.25-.13-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.1-.5.12-.11.25-.28.37-.42.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03 0 1.2.87 2.35 1 2.51.12.17 1.7 2.6 4.12 3.65.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28Z"/></svg> Chat on WhatsApp</a>
-          <a class="call-link" href="tel:+2347057370591">Call</a>
-        </div>
-      </div>
-      <div class="note-card">
-        <div class="note-sprig" aria-hidden="true">❧</div>
-        <p class="eyebrow">A LITTLE NOTE</p>
-        <p>Your presence is the greatest gift of all.<br>We can't wait to celebrate with you.</p><span class="envelope-mark" aria-hidden="true">✉</span>
-      </div>
-    </section>
-
-    <section class="story-section paper-section" id="story">
-      <div class="story-copy">
-        <p class="eyebrow">OUR STORY</p>
-        <h2>Wofai <span>&amp;</span><br>Tamunobelema</h2>
-        <p class="story-script">a love written in the stars</p>
-        <p>Somewhere along the way, two lives became one beautiful story. Now, surrounded by the people who mean the most, we would love to celebrate the beginning of our next chapter with you.</p>
-        <div class="flourish" aria-hidden="true">❧ &nbsp; ❦ &nbsp; ❧</div>
-      </div>
-      <figure class="story-photo"><img src="img/8.png" alt="A couple celebrating their wedding day outdoors"><span class="photo-caption">THE BEGINNING OF FOREVER</span></figure>
-      <div class="memory-strip"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=600&q=80" alt="Wedding table set for a celebration">
-        <div class="memory-note"><span class="script-line">For the days ahead</span>
-          <p>All our love,<br><em>Wofai &amp; Tamunobelema</em></p>
-        </div><img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=600&q=80" alt="Flowers and details prepared for a wedding">
-      </div>
-      <div class="forever-copy">
-        <p class="eyebrow">FOREVER &amp; ALWAYS</p>
-        <h3>Next chapter, <em>together.</em></h3>
-        <p>We are so grateful to have you in our lives.<br>Thank you for being part of our story.</p>
-      </div>
-      <div class="quote-band"><span aria-hidden="true">“</span>
-        <p>Two souls, one heart.</p><span class="quote-rule"></span>
-      </div>
-    </section>
-
-    <section class="moments-section paper-section" id="moments">
-      <p class="eyebrow">THE LITTLE MOMENTS</p>
-      <h2>Made for <em>remembering.</em></h2>
-      <div class="gallery-grid">
-        <button class="gallery-image gallery-tall" type="button" aria-label="View a wedding moment"><img src="img/3.png" alt="A couple walking together on their wedding day"><span>01</span></button>
-        <button class="gallery-image" type="button" aria-label="View wedding flowers"><img src="img/5.png" alt="Soft wedding flowers in a natural arrangement"><span>02</span></button>
-        <button class="gallery-image" type="button" aria-label="View wedding table details"><img src="img/6.png" alt="An intimate wedding table setting"><span>03</span></button>
-      </div>
-    </section>
-
-    <section class="rsvp-section" id="rsvp">
-      <div class="rsvp-heading">
-        <p class="eyebrow">A SEAT IS WAITING FOR YOU</p>
-        <h2>Kindly <em>RSVP.</em></h2>
-        <p>Please reply by Dec 10, 2026.<br>We hope you can be there.</p>
-        <div class="rsvp-flourish">W <span>&amp;</span> T</div>
-      </div>
-      <form class="rsvp-form" id="rsvp-form">
-        <label for="guest-name">YOUR NAME</label><input id="guest-name" name="name" type="text" placeholder="Full name" autocomplete="name" required>
-        <label for="guest-email">EMAIL ADDRESS</label><input id="guest-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
-        <fieldset>
-          <legend>YOUR REPLY</legend><label class="choice"><input type="radio" name="attendance" value="Joyfully accepts" required><span></span>Accepts with pleasure</label><label class="choice"><input type="radio" name="attendance" value="Regretfully declines"><span></span>Declines with regret</label>
-        </fieldset>
-        <label for="guest-count">NUMBER OF GUESTS</label><select id="guest-count" name="guests">
-          <option value="1">1 guest</option>
-          <option value="2">2 guests</option>
-          <option value="3">3 guests</option>
-          <option value="4">4 guests</option>
-        </select>
-        <label for="dietary">DIETARY REQUIREMENTS <small>(OPTIONAL)</small></label><input id="dietary" name="dietary" type="text" placeholder="Let us know about any allergies">
-        <label class="choice check"><input type="checkbox" name="accommodation" value="yes"><span></span>I need help with accommodation</label>
-        <button class="submit-button" type="submit">SEND YOUR RSVP <span>↗</span></button>
-        <p class="form-status" id="form-status" aria-live="polite"></p>
-        <p class="rsvp-help">Your reply is saved securely and shared with our coordinator, Patience Igbagri. Prefer to talk? <a href="tel:+2347057370591">Call her</a>.</p>
-      </form>
-    </section>
-
-    <section class="thank-you paper-section">
-      <div class="thank-branch" aria-hidden="true">❧</div>
-      <p class="brand-script">W <span>&</span> T</p>
-      <p class="eyebrow">WITH ALL OUR LOVE</p>
-      <h2>Thank <em>you.</em></h2>
-      <p>We can't wait to celebrate with you!</p>
-      <div class="tiny-flourish">⌁ ❦ ⌁</div>
-      <p class="signature">Wofai &amp; Tamunobelema</p>
-      <p class="footer-date">DECEMBER 30, 2026 &nbsp; · &nbsp; CALABAR, NIGERIA</p>
-    </section>
-  </main>
-  <footer class="footer"><a href="#top">BACK TO TOP ↑</a><span>MADE WITH LOVE · W &amp; T · 2026 · <a href="admin.html" rel="nofollow">ADMIN</a></span><a href="#rsvp">RSVP ↗</a></footer>
-  <a class="wa-fab" href="https://wa.me/2347057370591?text=Hello%20Patience%20Planner%2C%20I%27m%20a%20guest%20at%20Wofai%20%26%20Tamunobelema%27s%20wedding%20%2830%20Dec%202026%29%20and%20I%20have%20a%20question." target="_blank" rel="noopener" aria-label="Chat with the wedding coordinator on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.95L2 22l5.2-1.36A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.08.8.82-3-.2-.31a8.2 8.2 0 1 1 6.96 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.16.25-.63.8-.78.97-.14.16-.28.18-.53.06-.25-.13-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.1-.5.12-.11.25-.28.37-.42.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03 0 1.2.87 2.35 1 2.51.12.17 1.7 2.6 4.12 3.65.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28Z"/></svg><span>Planner</span></a>
-  <script src="enhance.js"></script>
-  <script src="/app.js"></script>
+      /* Back button: show the welcome screen again instead of a blank page */
+      window.addEventListener("pageshow", function (e) {
+        if (e.persisted) { go = false; splash.classList.remove("is-opening"); }
+      });
+    })();
+  </script>
 </body>
 
 </html>
