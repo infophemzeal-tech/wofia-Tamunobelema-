@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#f7f4e8">
-  <meta name="description" content="You are specially invited to the wedding of Wofai and Tamunobelema, December 30, 2026, at Marina Resort, Calabar.">
+  <meta name="theme-color" content="#696b50">
+  <meta name="description" content="A wedding invitation for Wofai and Tamunobelema, December 30, 2026, at Marina Resort, Calabar.">
   <!-- Link preview (WhatsApp, Facebook, iMessage, Telegram, etc.) -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Wofai &amp; Tamunobelema">
@@ -25,11 +25,369 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="prefetch" href="invitations.html">
+  <link rel="stylesheet" href="/theme.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="mobile.css">
   <style>
-    /* Splash screen */
-    html, body { margin: 0; height: 100%; overflow: hidden; background: #f7f4e8; }
-    .splash { display: flex; }
+    /* Venue photo */
+    .venue-photo {
+      width: 100%;
+      max-width: 420px;
+      margin: 1.5rem auto;
+      padding: 0;
+      overflow: hidden;
+      border-radius: 6px;
+      border: 1px solid rgba(247, 244, 232, .45);
+      box-shadow: 0 0 0 6px rgba(105, 107, 80, 1), 0 0 0 7px rgba(247, 244, 232, .3);
+    }
+    .venue-photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 600 / 350;
+      object-fit: cover;
+    }
+
+    /* Gifting note */
+    .note-lead {
+      font-family: var(--font-display, "Cormorant Garamond", serif);
+      font-style: italic;
+      font-size: 1.35rem;
+      margin: .5rem 0 .75rem;
+    }
+    .note-body {
+      max-width: 34rem;
+      margin: 0 auto 1.5rem;
+      line-height: 1.7;
+    }
+    .gift-card {
+      max-width: 22rem;
+      margin: 0 auto 1.5rem;
+      padding: 1.5rem 1.25rem;
+      border: 1px solid rgba(105, 107, 80, .35);
+      background: rgba(255, 255, 255, .45);
+      border-radius: 6px;
+    }
+    .gift-details { margin: 1rem 0; }
+    .gift-details > div { margin-bottom: .75rem; }
+    .gift-details dt {
+      font-family: "Manrope", sans-serif;
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      opacity: .7;
+    }
+    .gift-details dd {
+      margin: .15rem 0 0;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.25rem;
+    }
+    .acct-number {
+      font-size: 1.6rem !important;
+      letter-spacing: .12em;
+      color: #696b50;
+    }
+    .copy-button {
+      font-family: "Manrope", sans-serif;
+      font-size: .7rem;
+      letter-spacing: .18em;
+      padding: .75rem 1.25rem;
+      border: 1px solid #696b50;
+      background: transparent;
+      color: #696b50;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    .copy-button:hover, .copy-button:focus-visible { background: #696b50; color: #fff; }
+    .copy-status { min-height: 1.2em; margin: .6rem 0 0; font-size: .85rem; font-style: italic; }
+    .note-sign { margin-top: 1rem; }
+
+    /* Moments carousel */
+    .carousel { max-width: 440px; margin: 2rem auto 0; }
+    .carousel-frame { position: relative; }
+    .carousel-track {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      border-radius: 6px;
+      border: 1px solid rgba(105, 107, 80, .35);
+      box-shadow: 0 0 0 8px var(--color-bg, #f7f4e8), 0 0 0 9px rgba(105, 107, 80, .25);
+      -webkit-overflow-scrolling: touch;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    .carousel-track:focus-visible { outline: 2px solid #696b50; outline-offset: 10px; }
+    .carousel-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: center;
+      aspect-ratio: 4 / 5;
+      background: rgba(105, 107, 80, .08);
+    }
+    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; display: block; }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .7);
+      background: rgba(105, 107, 80, .6);
+      color: #fff;
+      font-size: 1.6rem;
+      line-height: 1;
+      padding: 0 0 .2rem;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: background .2s;
+    }
+    .carousel-btn:hover, .carousel-btn:focus-visible { background: rgba(105, 107, 80, .9); }
+    .carousel-prev { left: .6rem; }
+    .carousel-next { right: .6rem; }
+    .carousel-dots { display: flex; justify-content: center; gap: .55rem; margin-top: 1.75rem; }
+    .carousel-dot {
+      width: .6rem;
+      height: .6rem;
+      padding: 0;
+      border-radius: 50%;
+      border: 1px solid #696b50;
+      background: transparent;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .carousel-dot.is-active { background: #696b50; transform: scale(1.2); }
+    .carousel-count {
+      margin: .75rem 0 0;
+      text-align: center;
+      font-family: "Manrope", sans-serif;
+      font-size: .7rem;
+      letter-spacing: .2em;
+      opacity: .7;
+    }
+    @media (prefers-reduced-motion: reduce) { .carousel-track { scroll-behavior: auto; } }
+
+    /* ===== Full-screen hero carousel ===== */
+    html { scroll-behavior: smooth; }
+    section[id] { scroll-margin-top: 3.5rem; }
+    .hero-cover {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      height: 100svh;
+      min-height: 560px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      background: linear-gradient(160deg, #4e5039, #696b50);
+    }
+    .hero-slides { position: absolute; inset: 0; }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 28%;
+      opacity: 0;
+      transform: scale(1);
+      transition: opacity 1.6s ease, transform 10s linear;
+    }
+    .hero-slide.is-active { opacity: 1; transform: scale(1.08); }
+    .hero-shade {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0, 0, 0, .38) 0%, rgba(0, 0, 0, .28) 45%, rgba(40, 41, 30, .25) 70%, rgba(105, 107, 80, .96) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; padding: 0 1.25rem 3rem; text-shadow: 0 2px 18px rgba(0, 0, 0, .45); }
+    .hero-content > * { opacity: 0; animation: hero-rise 1.1s cubic-bezier(.2, .7, .2, 1) forwards; }
+    .hero-eyebrow {
+      margin: 0 0 1.1rem;
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(.68rem, 2.6vw, .95rem);
+      letter-spacing: .42em;
+      text-transform: uppercase;
+      animation-delay: .2s;
+    }
+    .hero-content h1 {
+      margin: 0;
+      font-family: "Great Vibes", cursive;
+      font-weight: 400;
+      line-height: 1.05;
+      font-size: clamp(3rem, 15vw, 6.8rem);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation-delay: .45s;
+    }
+    .hero-content h1 .hn { display: block; }
+    .hero-heart { width: clamp(1.7rem, 6vw, 2.6rem); height: auto; margin: .9rem 0 .6rem; color: #e6d7ad; filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .35)); animation: hero-beat 2.4s ease-in-out 2s infinite; }
+    .hero-date {
+      margin: 1.6rem 0 0;
+      font-family: "Manrope", sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.05rem, 4.6vw, 1.9rem);
+      letter-spacing: .14em;
+      line-height: 1.5;
+      animation-delay: .85s;
+    }
+    .hero-place {
+      margin: .6rem 0 0;
+      font-family: "Manrope", sans-serif;
+      font-weight: 500;
+      font-size: clamp(.78rem, 3vw, 1rem);
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: #e6d7ad;
+      animation-delay: 1.1s;
+    }
+    .hero-chevron {
+      position: absolute;
+      z-index: 2;
+      left: 50%;
+      bottom: calc(5.2rem + env(safe-area-inset-bottom, 0px));
+      width: 1.5rem;
+      margin-left: -.75rem;
+      color: #e6d7ad;
+      animation: hero-bob 1.8s ease-in-out infinite;
+    }
+    .hero-chevron svg { display: block; width: 100%; height: auto; }
+    .hero-bar {
+      position: absolute;
+      z-index: 3;
+      left: 0; right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      padding: 0 5.2rem calc(1.1rem + env(safe-area-inset-bottom, 0px)) 1rem;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      white-space: nowrap;
+      padding: .85rem 1.15rem;
+      border-radius: 999px;
+      background: rgba(28, 29, 22, .78);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, .14);
+      color: #fff;
+      text-decoration: none;
+      font-family: "Manrope", sans-serif;
+      font-weight: 500;
+      font-size: .68rem;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .25);
+      transition: background .2s, transform .2s;
+    }
+    .hero-pill:hover, .hero-pill:focus-visible { background: rgba(28, 29, 22, .95); transform: translateY(-1px); }
+    .hero-pill svg { width: 1rem; height: 1rem; color: #e6d7ad; flex: none; }
+    .hero-pill-scroll i { width: .5rem; height: .5rem; border-radius: 50%; background: #e6d7ad; flex: none; }
+    @media (min-width: 768px) {
+      .hero-bar { padding: 0 6rem calc(1.5rem + env(safe-area-inset-bottom, 0px)) 1.75rem; }
+      .hero-pill-scroll { position: absolute; left: 50%; transform: translateX(-50%); }
+      .hero-pill-scroll:hover, .hero-pill-scroll:focus-visible { transform: translateX(-50%) translateY(-1px); }
+      .hero-chevron { bottom: calc(6rem + env(safe-area-inset-bottom, 0px)); }
+    }
+    @media (max-width: 480px) {
+      .hero-bar { gap: .45rem; padding: 0 4.9rem calc(1.1rem + env(safe-area-inset-bottom, 0px)) .8rem; }
+      .hero-pill { padding: .8rem .85rem; font-size: .6rem; letter-spacing: .1em; gap: .4rem; }
+      .hero-pill svg { width: .9rem; height: .9rem; }
+      .hide-sm { display: none; }
+    }
+    @keyframes hero-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+    @keyframes hero-bob { 0%, 100% { transform: translateY(0); opacity: .9; } 50% { transform: translateY(-7px); opacity: .5; } }
+    @keyframes hero-beat { 0%, 100% { transform: scale(1); } 12% { transform: scale(1.18); } 24% { transform: scale(1); } }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-slide, .hero-slide.is-active { transform: none; transition: opacity .6s ease; }
+      .hero-content > *, .hero-chevron, .hero-heart { animation: none; opacity: 1; }
+    }
+
+    /* Top menu bar: hidden over the hero, slides in once you scroll past it */
+    .header {
+      position: fixed !important;
+      top: 0; left: 0; right: 0;
+      z-index: 90;
+      transform: translateY(-110%);
+      transition: transform .4s ease;
+      background: rgba(247, 244, 232, .96);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 rgba(105, 107, 80, .18);
+    }
+    .header.is-visible { transform: none; }
+
+    /* Music button (bottom-right) */
+    .music-btn {
+      position: fixed;
+      right: max(1rem, env(safe-area-inset-right, 0px));
+      bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+      z-index: 60;
+      width: 3.4rem;
+      height: 3.4rem;
+      border-radius: 18px;
+      border: 1px solid rgba(105, 107, 80, .25);
+      background: rgba(247, 244, 232, .95);
+      color: #696b50;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .22);
+      transition: transform .2s, background .2s;
+    }
+    .music-btn:hover, .music-btn:focus-visible { transform: scale(1.06); background: #fff; }
+    .music-btn svg { width: 1.35rem; height: 1.35rem; display: block; }
+    .music-btn .icon-on, .splash-music-btn .icon-on { display: none; }
+    .music-btn.is-playing .icon-on, .splash-music-btn.is-playing .icon-on { display: block; }
+    .music-btn.is-playing .icon-off, .splash-music-btn.is-playing .icon-off { display: none; }
+    .music-btn::after {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      border-radius: 24px;
+      border: 1px solid rgba(105, 107, 80, .55);
+      animation: music-pulse 2.4s ease-out infinite;
+    }
+    .music-btn.is-playing::after { animation: none; opacity: 0; }
+    @keyframes music-pulse { 0% { transform: scale(.9); opacity: .9; } 100% { transform: scale(1.35); opacity: 0; } }
+    .music-hint {
+      position: fixed;
+      right: max(5rem, calc(env(safe-area-inset-right, 0px) + 5rem));
+      bottom: max(1.7rem, calc(env(safe-area-inset-bottom, 0px) + .7rem));
+      z-index: 60;
+      padding: .35rem .7rem;
+      border-radius: 999px;
+      background: rgba(247, 244, 232, .95);
+      color: #696b50;
+      font-family: "Manrope", sans-serif;
+      font-size: .7rem;
+      letter-spacing: .12em;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+    .music-hint.show { opacity: 1; }
+    @media (prefers-reduced-motion: reduce) { .music-btn::after { animation: none; } }
+    /* keep the WhatsApp button clear of the music button */
+    .wa-fab { bottom: calc(5.6rem + env(safe-area-inset-bottom, 0px)) !important; }
+
+    /* ===== Splash screen (same page, so the music keeps playing) ===== */
+    .splash { display: none; }
+    .js.splash-lock .splash { display: flex; }
+    .js.splash-lock, .js.splash-lock body { overflow: hidden; height: 100%; }
     .splash {
       position: fixed;
       inset: 0;
@@ -44,7 +402,7 @@
       overflow: hidden;
       transition: transform 1.1s cubic-bezier(.77, 0, .18, 1), opacity .9s ease .2s;
     }
-    .splash::before {              /* soft glow behind the names */
+    .splash::before {
       content: "";
       position: absolute;
       width: min(120vw, 640px);
@@ -54,13 +412,7 @@
       background: radial-gradient(circle, rgba(105, 107, 80, .14), rgba(105, 107, 80, 0) 65%);
       animation: splash-breathe 6s ease-in-out infinite;
     }
-    .splash-sprig {
-      position: absolute;
-      width: 90px;
-      color: #696b50;
-      opacity: 0;
-      animation: splash-fade 1.6s ease .3s forwards;
-    }
+    .splash-sprig { position: absolute; width: 90px; color: #696b50; opacity: 0; animation: splash-fade 1.6s ease .3s forwards; }
     .splash-sprig-a { top: 6%; left: 8%; }
     .splash-sprig-b { bottom: 6%; right: 8%; transform: rotate(180deg); }
     .splash-names {
@@ -76,17 +428,10 @@
     .splash-names .n1 { animation-delay: .4s; }
     .splash-names .amp { color: #a9a07f; font-size: .7em; line-height: 1; animation-delay: .8s; }
     .splash-names .n2 { animation-delay: 1.2s; }
-    .splash-rule {
-      position: relative;
-      width: 0;
-      height: 1px;
-      margin: 1.75rem auto 1.5rem;
-      background: #a9a07f;
-      animation: splash-line 1.2s ease 1.7s forwards;
-    }
+    .splash-rule { position: relative; width: 0; height: 1px; margin: 1.75rem auto 1.5rem; background: #a9a07f; animation: splash-line 1.2s ease 1.7s forwards; }
     .splash-invited {
       position: relative;
-      margin: 0 0 2.5rem;
+      margin: 0 0 2.2rem;
       font-family: "Manrope", sans-serif;
       font-size: .78rem;
       letter-spacing: .38em;
@@ -113,7 +458,7 @@
       animation: splash-rise 1s ease 2.4s forwards, splash-pulse 2.6s ease-in-out 3.6s infinite;
       transition: transform .25s ease, box-shadow .25s ease;
     }
-    .splash-open::after {          /* shimmer sweep */
+    .splash-open::after {
       content: "";
       position: absolute;
       top: 0; bottom: 0;
@@ -128,12 +473,57 @@
     .splash-open .arrow { display: inline-block; margin-left: .5rem; transition: transform .25s; }
     .splash-open:hover .arrow { transform: translate(3px, -3px); }
 
-    /* Opening: names drift up and fade, the whole screen lifts away */
-    .splash.is-opening { opacity: 0; pointer-events: none; transition: opacity .9s ease .25s; }
+    /* Splash music button: centred under the "Open invitation" button */
+    .splash-music {
+      position: relative;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .7rem;
+      opacity: 0;
+      animation: splash-rise 1s ease 2.8s forwards;
+    }
+    .splash-music-btn {
+      position: relative;
+      width: 3.4rem;
+      height: 3.4rem;
+      border-radius: 50%;
+      border: 1px solid rgba(105, 107, 80, .55);
+      background: transparent;
+      color: #696b50;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      cursor: pointer;
+      transition: background .25s, color .25s, transform .25s;
+    }
+    .splash-music-btn:hover, .splash-music-btn:focus-visible { transform: scale(1.06); background: rgba(105, 107, 80, .1); }
+    .splash-music-btn svg { width: 1.4rem; height: 1.4rem; display: block; }
+    .splash-music-btn.is-playing { background: #696b50; color: #fff; }
+    .splash-music-btn::after {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(105, 107, 80, .45);
+      opacity: 0;
+    }
+    .splash-music-btn.is-playing::after { animation: music-pulse 2.4s ease-out infinite; }
+    .splash-music-label {
+      font-family: "Manrope", sans-serif;
+      font-size: .62rem;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      opacity: .8;
+    }
+
+    .splash.is-opening { transform: translateY(-100%); opacity: 0; pointer-events: none; }
     .splash.is-opening .splash-names,
     .splash.is-opening .splash-rule,
     .splash.is-opening .splash-invited,
-    .splash.is-opening .splash-open { transition: transform .9s ease, opacity .6s ease; transform: translateY(-24px) scale(1.04); opacity: 0; }
+    .splash.is-opening .splash-open,
+    .splash.is-opening .splash-music { transition: transform .9s ease, opacity .6s ease; transform: translateY(-24px) scale(1.04); opacity: 0; }
 
     @keyframes splash-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
     @keyframes splash-fade { to { opacity: .22; } }
@@ -144,17 +534,21 @@
       50% { box-shadow: 0 12px 28px rgba(105, 107, 80, .35), 0 0 0 14px rgba(105, 107, 80, 0); }
     }
     @keyframes splash-shimmer { 0% { left: -60%; } 55%, 100% { left: 130%; } }
+    @media (max-height: 640px) {
+      .splash-invited { margin-bottom: 1.4rem; }
+      .splash-music { margin-top: 1.2rem; }
+    }
     @media (prefers-reduced-motion: reduce) {
       .splash, .splash * { animation-duration: .01s !important; animation-delay: 0s !important; transition-duration: .3s !important; }
     }
   </style>
-  <script>
-    /* Old links like index.html#rsvp go straight to the s */
-    if (location.hash) location.replace("invitations.html" + location.hash);
-  </script>
+  <script>document.documentElement.classList.add("js"); if (!location.hash) document.documentElement.classList.add("splash-lock");</script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="bg-[var(--color-bg)] text-[var(--color-text)] font-[var(--font-body)] antialiased">
+
+  <!-- Splash screen -->
   <div class="splash" id="splash" role="dialog" aria-modal="true" aria-label="Wedding invitation welcome">
     <svg class="splash-sprig splash-sprig-a" viewBox="0 0 120 260" fill="none" aria-hidden="true"><path d="M14 255C48 202 29 158 67 113 91 83 96 43 104 7M50 144C25 134 21 113 25 98c21 6 30 21 25 46ZM70 111c-3-23 7-40 24-46 6 20-3 37-24 46ZM35 194c-20-1-31-15-32-30 19 0 33 11 32 30ZM88 73c-1-22 10-35 24-39 2 18-7 32-24 39ZM21 226c-14-1-22-10-21-22 13 2 22 9 21 22Z" stroke="currentColor" stroke-width="1.2"/></svg>
     <svg class="splash-sprig splash-sprig-b" viewBox="0 0 120 260" fill="none" aria-hidden="true"><path d="M14 255C48 202 29 158 67 113 91 83 96 43 104 7M50 144C25 134 21 113 25 98c21 6 30 21 25 46ZM70 111c-3-23 7-40 24-46 6 20-3 37-24 46ZM35 194c-20-1-31-15-32-30 19 0 33 11 32 30ZM88 73c-1-22 10-35 24-39 2 18-7 32-24 39ZM21 226c-14-1-22-10-21-22 13 2 22 9 21 22Z" stroke="currentColor" stroke-width="1.2"/></svg>
@@ -162,29 +556,587 @@
     <div class="splash-rule" aria-hidden="true"></div>
     <p class="splash-invited">You are specially invited</p>
     <button class="splash-open" id="splash-open" type="button">Open invitation <span class="arrow" aria-hidden="true">↗</span></button>
+    <div class="splash-music">
+      <button class="splash-music-btn" id="splash-music" type="button" aria-pressed="false" aria-label="Play music">
+        <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="m16 9 5 6m0-6-5 6"/></svg>
+        <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+      </button>
+      <span class="splash-music-label" id="splash-music-label" aria-live="polite">Tap for music</span>
+    </div>
   </div>
 
+  <header class="header" id="top">
+    <a class="brand-script" href="#top" aria-label="Wofai and Tamunobelema">W <span>&</span> T</a>
+    <button class="menu-button" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span></button>
+    <nav class="navigation" id="main-nav" aria-label="Main navigation">
+      <a href="#story">Our story</a><a href="#details">The details</a><a href="#moments">Moments</a><a href="#rsvp">RSVP</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-cover" id="hero" aria-labelledby="couple-name">
+      <div class="hero-slides" id="hero-slides" aria-hidden="true">
+        <img class="hero-slide is-active" src="img/hero.jpeg" alt="">
+      </div>
+      <div class="hero-shade" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <p class="hero-eyebrow">Join us as we tie the knot</p>
+        <h1 id="couple-name">
+          <span class="hn hn1">Wofai</span>
+          <svg class="hero-heart" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 21.2 10.6 20C5.4 15.3 2 12.2 2 8.5 2 5.4 4.4 3 7.5 3c1.7 0 3.4.8 4.5 2.1C13.1 3.8 14.8 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.7-3.4 6.8-8.6 11.5L12 21.2Z"/></svg>
+          <span class="hn hn2">Tamunobelema</span>
+        </h1>
+        <p class="hero-date">Wednesday, 30th December 2026</p>
+        <p class="hero-place">Marina Resort · Calabar</p>
+      </div>
+
+      <a class="hero-chevron" href="#venue" tabindex="-1" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 11 6-6 6 6"/><path d="m6 18 6-6 6 6"/></svg>
+      </a>
+
+      <div class="hero-bar">
+        <a class="hero-pill" href="https://maps.google.com/?q=Marina+Resort+Calabar+Nigeria" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Venue
+        </a>
+        <a class="hero-pill hero-pill-scroll" href="#venue"><i aria-hidden="true"></i> Scroll <span class="hide-sm">up </span>for details</a>
+      </div>
+    </section>
+
+    <section class="venue-section olive-section" id="venue">
+      <p class="eyebrow">THE PLACE</p>
+      <h2>Where we say <em>“I do.”</em></h2>
+      <p class="venue-name">Marina Resort</p>
+      <p class="venue-location">CALABAR, CROSS RIVER STATE</p>
+      <figure class="venue-photo">
+        <img src="img/venue.png" alt="Marina Resort, Calabar, with its green-roofed pavilion and the river beyond">
+      </figure>
+      <p class="venue-address">Marina Resort, Calabar<br>Cross River State, Nigeria</p>
+      <a class="outline-link" href="https://maps.google.com/?q=Marina+Resort+Calabar+Nigeria" target="_blank" rel="noreferrer">VIEW MAP <span>↗</span></a>
+      <p class="venue-note">Reception to follow immediately after the ceremony.</p>
+    </section>
+
+    <section class="details-section paper-section" id="details">
+      <div class="section-intro">
+        <p class="eyebrow">THE DAY AT A GLANCE</p>
+        <h2>A little more <em>about the day.</em></h2>
+        <p>We can't wait to gather with you in Calabar. Here are a few thoughtful notes to help you plan.</p>
+      </div>
+      <div class="detail-list">
+        <article class="detail-item"><span class="detail-icon" aria-hidden="true">♧</span>
+          <div>
+            <p class="eyebrow">DRESS CODE</p>
+            <h3>Come dressed to celebrate</h3>
+            <p>We invite you to dress in the colours of the day: ivory, cream, sage green and burgundy.</p>
+          </div>
+        </article>
+        <article class="detail-item"><span class="detail-icon" aria-hidden="true">⌂</span>
+          <div>
+            <p class="eyebrow">ACCOMMODATION</p>
+            <h3>A place to rest</h3>
+            <p>If you need accommodation or have special arrangements, please message our wedding coordinator, Patience Igbagri, on WhatsApp.</p>
+          </div>
+        </article>
+        <article class="detail-item"><span class="detail-icon" aria-hidden="true">⌑</span>
+          <div>
+            <p class="eyebrow">GETTING THERE</p>
+            <h3>Meet us in Calabar</h3>
+            <p>Marina Resort is in Calabar, Cross River State. Please allow time for your journey and arrive by 11:30 AM.</p>
+          </div>
+        </article>
+      </div>
+      <div class="planner-card" id="planner">
+        <p class="eyebrow">WEDDING COORDINATOR</p>
+        <h3>Patience Igbagri</h3>
+        <p>For accommodation, special arrangements or any question about the day, reach out directly.</p>
+        <a class="planner-phone" href="tel:+2347057370591">+234 705 737 0591</a>
+        <div class="planner-actions">
+          <a class="wa-link" href="https://wa.me/2347057370591?text=Hello%20Patience%20Planner%2C%20I%27m%20a%20guest%20at%20Wofai%20%26%20Tamunobelema%27s%20wedding%20%2830%20Dec%202026%29%20and%20I%20have%20a%20question." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.95L2 22l5.2-1.36A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.08.8.82-3-.2-.31a8.2 8.2 0 1 1 6.96 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.16.25-.63.8-.78.97-.14.16-.28.18-.53.06-.25-.13-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.1-.5.12-.11.25-.28.37-.42.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03 0 1.2.87 2.35 1 2.51.12.17 1.7 2.6 4.12 3.65.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28Z"/></svg> Chat on WhatsApp</a>
+          <a class="call-link" href="tel:+2347057370591">Call</a>
+        </div>
+      </div>
+      <div class="note-card" id="gifts">
+        <div class="note-sprig" aria-hidden="true">❧</div>
+        <p class="eyebrow">A LITTLE NOTE</p>
+        <p class="note-lead">Your presence is the greatest gift of all.</p>
+        <p class="note-body">For those who wish to honour us with a thoughtful gift, we have created a little space to make gifting easy. Every gesture of love and kindness is deeply appreciated.</p>
+
+        <div class="gift-card">
+          <p class="eyebrow">MONETARY GIFTS · BANK TRANSFER</p>
+          <dl class="gift-details">
+            <div><dt>Account name</dt><dd>Wofai Ojah</dd></div>
+            <div><dt>Bank</dt><dd>GTBank</dd></div>
+            <div><dt>Account number</dt><dd class="acct-number" id="acct-number">0158960712</dd></div>
+          </dl>
+          <button class="copy-button" type="button" id="copy-acct" data-number="0158960712">COPY ACCOUNT NUMBER</button>
+          <p class="copy-status" id="copy-status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section paper-section" id="story">
+      <div class="story-copy">
+        <p class="eyebrow">OUR STORY</p>
+        <h2>Wofai <span>&amp;</span><br>Tamunobelema</h2>
+        <p class="story-script">a love written in the stars</p>
+        <p>Somewhere along the way, two lives became one beautiful story. Now, surrounded by the people who mean the most, we would love to celebrate the beginning of our next chapter with you.</p>
+        <div class="flourish" aria-hidden="true">❧ &nbsp; ❦ &nbsp; ❧</div>
+      </div>
+      <figure class="story-photo"><img src="img/8.png" alt="A couple celebrating their wedding day outdoors"><span class="photo-caption">THE BEGINNING OF FOREVER</span></figure>
+      <div class="memory-strip"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=600&q=80" alt="Wedding table set for a celebration">
+        <div class="memory-note"><span class="script-line">For the days ahead</span>
+          <p>All our love,<br><em>Wofai &amp; Tamunobelema</em></p>
+        </div><img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=600&q=80" alt="Flowers and details prepared for a wedding">
+      </div>
+      <div class="forever-copy">
+        <p class="eyebrow">FOREVER &amp; ALWAYS</p>
+        <h3>Next chapter, <em>together.</em></h3>
+        <p>We are so grateful to have you in our lives.<br>Thank you for being part of our story.</p>
+      </div>
+      <div class="quote-band"><span aria-hidden="true">“</span>
+        <p>Two souls, one heart.</p><span class="quote-rule"></span>
+      </div>
+    </section>
+
+    <section class="moments-section paper-section" id="moments">
+      <p class="eyebrow">THE LITTLE MOMENTS</p>
+      <h2>Made for <em>remembering.</em></h2>
+      <div class="carousel" id="moments-carousel" role="region" aria-roledescription="carousel" aria-label="Wedding photo gallery">
+        <div class="carousel-frame">
+          <ul class="carousel-track" id="carousel-track" tabindex="0" aria-live="off"></ul>
+          <button type="button" class="carousel-btn carousel-prev" aria-label="Previous photo">‹</button>
+          <button type="button" class="carousel-btn carousel-next" aria-label="Next photo">›</button>
+        </div>
+        <div class="carousel-dots" id="carousel-dots"></div>
+        <p class="carousel-count" aria-hidden="true"><span id="carousel-current">1</span> / <span id="carousel-total">1</span></p>
+      </div>
+    </section>
+
+    <section class="rsvp-section" id="rsvp">
+      <div class="rsvp-heading">
+        <p class="eyebrow">A SEAT IS WAITING FOR YOU</p>
+        <h2>Kindly <em>RSVP.</em></h2>
+        <p>Please reply by Dec 10, 2026.<br>We hope you can be there.</p>
+        <div class="rsvp-flourish">W <span>&amp;</span> T</div>
+      </div>
+      <form class="rsvp-form" id="rsvp-form">
+        <label for="guest-name">YOUR NAME</label><input id="guest-name" name="name" type="text" placeholder="Full name" autocomplete="name" required>
+        <label for="guest-email">EMAIL ADDRESS</label><input id="guest-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+        <fieldset>
+          <legend>YOUR REPLY</legend><label class="choice"><input type="radio" name="attendance" value="Joyfully accepts" required><span></span>Accepts with pleasure</label><label class="choice"><input type="radio" name="attendance" value="Regretfully declines"><span></span>Declines with regret</label>
+        </fieldset>
+        <label for="guest-count">NUMBER OF GUESTS</label><select id="guest-count" name="guests">
+          <option value="1">1 guest</option>
+          <option value="2">2 guests</option>
+          <option value="3">3 guests</option>
+          <option value="4">4 guests</option>
+        </select>
+        <label for="dietary">DIETARY REQUIREMENTS <small>(OPTIONAL)</small></label><input id="dietary" name="dietary" type="text" placeholder="Let us know about any allergies">
+        <label class="choice check"><input type="checkbox" name="accommodation" value="yes"><span></span>I need help with accommodation</label>
+        <button class="submit-button" type="submit">SEND YOUR RSVP <span>↗</span></button>
+        <p class="form-status" id="form-status" aria-live="polite"></p>
+        <p class="rsvp-help">Your reply is saved securely and shared with our coordinator, Patience Igbagri. Prefer to talk? <a href="tel:+2347057370591">Call her</a>.</p>
+      </form>
+    </section>
+
+    <section class="thank-you paper-section">
+      <div class="thank-branch" aria-hidden="true">❧</div>
+      <p class="eyebrow">WITH ALL OUR LOVE</p>
+      <h2>Thank <em>you.</em></h2>
+      <p>We can't wait to celebrate with you!</p>
+      <div class="tiny-flourish">⌁ ❦ ⌁</div>
+      <p class="signature">Wofai &amp; Tamunobelema</p>
+    </section>
+  </main>
+  <footer class="footer"><a href="#top">BACK TO TOP ↑</a><span>MADE WITH LOVE · W &amp; T · 2026 · <a href="admin.html" rel="nofollow">ADMIN</a></span><a href="#rsvp">RSVP ↗</a></footer>
+  <a class="wa-fab" href="https://wa.me/2347057370591?text=Hello%20Patience%20Planner%2C%20I%27m%20a%20guest%20at%20Wofai%20%26%20Tamunobelema%27s%20wedding%20%2830%20Dec%202026%29%20and%20I%20have%20a%20question." target="_blank" rel="noopener" aria-label="Chat with the wedding coordinator on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.95L2 22l5.2-1.36A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.08.8.82-3-.2-.31a8.2 8.2 0 1 1 6.96 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.16.25-.63.8-.78.97-.14.16-.28.18-.53.06-.25-.13-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.1-.5.12-.11.25-.28.37-.42.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03 0 1.2.87 2.35 1 2.51.12.17 1.7 2.6 4.12 3.65.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28Z"/></svg><span>Planner</span></a>
+
+  <audio id="bg-music" src="audio/song.mp3" loop preload="auto"></audio>
+  <button class="music-btn" id="music-toggle" type="button" aria-pressed="false" aria-label="Play music">
+    <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="m16 9 5 6m0-6-5 6"/></svg>
+    <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+  </button>
+  <span class="music-hint" id="music-hint" aria-live="polite"></span>
+
   <script>
+    /* Copy account number */
     (function () {
-      var splash = document.getElementById("splash");
-      var btn = document.getElementById("splash-open");
-      var TARGET = "invitations.html";
-      var go = false;
-      setTimeout(function () { btn.focus({ preventScroll: true }); }, 2600);
-
+      var btn = document.getElementById("copy-acct");
+      var status = document.getElementById("copy-status");
+      if (!btn) return;
       btn.addEventListener("click", function () {
-        if (go) return;
-        go = true;
-        splash.classList.add("is-opening");
-        setTimeout(function () { window.location.href = TARGET; }, 1000);
-      });
-
-      /* Back button: show the welcome screen again instead of a blank page */
-      window.addEventListener("pageshow", function (e) {
-        if (e.persisted) { go = false; splash.classList.remove("is-opening"); }
+        var num = btn.getAttribute("data-number");
+        function done(msg) {
+          status.textContent = msg;
+          setTimeout(function () { status.textContent = ""; }, 2500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(num).then(
+            function () { done("Account number copied. Thank you! ♡"); },
+            function () { done("Please copy the number manually."); }
+          );
+        } else {
+          done("Please copy the number manually.");
+        }
       });
     })();
   </script>
+
+  <script>
+    /* Background music.
+       - Starts on the splash screen (first tap anywhere, or "Open invitation") and fades in slowly.
+       - The round button on the splash, and the one at the bottom-right later, both mute / unmute. */
+    (function () {
+      var audio = document.getElementById("bg-music");
+      var btns = [document.getElementById("music-toggle"), document.getElementById("splash-music")].filter(Boolean);
+      var label = document.getElementById("splash-music-label");
+      var hint = document.getElementById("music-hint");
+      var root = document.documentElement;
+      if (!audio || !btns.length) return;
+
+      var TARGET = 0.6;     /* final volume, 0 to 1 */
+      var FADE_IN = 6000;   /* ms to rise from silence to full volume */
+      var FADE_OUT = 600;   /* ms to fade out when muting */
+      var on = false, userMuted = false, failed = false, pending = false; /* pending = playing silently, waiting for the first tap to bring the sound in */
+      var ctx = null, gain = null, fadeTimer = null, hintT = null;
+
+      function setupGraph() {      /* Web Audio gives smooth fades, and works on iPhones too */
+        if (gain || !/^https?:/.test(location.protocol)) return;
+        var AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return;
+        try {
+          ctx = new AC();
+          var src = ctx.createMediaElementSource(audio);
+          gain = ctx.createGain();
+          gain.gain.value = 0;
+          src.connect(gain);
+          gain.connect(ctx.destination);
+          audio.volume = 1;
+        } catch (e) { ctx = null; gain = null; }
+      }
+      function ramp(to, ms, done) {
+        clearInterval(fadeTimer);
+        if (gain) {
+          var t = ctx.currentTime;
+          gain.gain.cancelScheduledValues(t);
+          gain.gain.setValueAtTime(gain.gain.value, t);
+          gain.gain.linearRampToValueAtTime(to, t + ms / 1000);
+          if (done) setTimeout(done, ms + 30);
+          return;
+        }
+        var from = audio.volume, t0 = performance.now();
+        fadeTimer = setInterval(function () {
+          var k = Math.min(1, (performance.now() - t0) / ms);
+          audio.volume = Math.max(0, Math.min(1, from + (to - from) * k));
+          if (k >= 1) { clearInterval(fadeTimer); if (done) done(); }
+        }, 50);
+      }
+      function say(msg) {
+        if (!hint) return;
+        hint.textContent = msg;
+        hint.classList.add("show");
+        clearTimeout(hintT);
+        hintT = setTimeout(function () { hint.classList.remove("show"); }, 2200);
+      }
+      function setState(isOn) {
+        btns.forEach(function (b) {
+          b.classList.toggle("is-playing", isOn);
+          b.setAttribute("aria-pressed", isOn ? "true" : "false");
+          b.setAttribute("aria-label", isOn ? "Mute music" : "Play music");
+        });
+        if (label) label.textContent = pending ? "Tap anywhere to hear music" : (isOn ? "Music on · tap to mute" : (userMuted ? "Music muted · tap to play" : "Tap for music"));
+      }
+
+      function startMusic() {      /* must be called from a tap/click */
+        if (on || failed) return;
+        on = true; userMuted = false; pending = false;
+        setupGraph();
+        if (ctx && ctx.state === "suspended") ctx.resume();
+        if (gain) { gain.gain.cancelScheduledValues(0); gain.gain.value = 0; audio.volume = 1; }
+        else { audio.volume = 0; }
+        audio.muted = false;
+        var p = audio.play();
+        setState(true);
+        ramp(TARGET, FADE_IN);
+        if (p && p.catch) p.catch(function () { on = false; clearInterval(fadeTimer); setState(false); say("Music unavailable"); });
+      }
+      function stopMusic() {
+        on = false; userMuted = true; pending = false;
+        setState(false);
+        ramp(0, FADE_OUT, function () { if (!on) audio.pause(); });
+      }
+
+      btns.forEach(function (b) {
+        b.addEventListener("click", function () {
+          if (pending) { startMusic(); return; }   /* first tap: bring the sound in */
+          if (on) { stopMusic(); say("Music muted"); }
+          else { startMusic(); say("Music on"); }
+        });
+      });
+      audio.addEventListener("error", function () { failed = true; on = false; pending = false; setState(false); });
+
+      /* Public hook so the splash's "Open invitation" button can start the music too */
+      window.weddingMusic = { startIfAllowed: function () { if (!on && !userMuted && !failed) startMusic(); } };
+
+      /* While the splash is showing, the music starts by itself.
+         1) Try normal autoplay (works in some browsers).
+         2) If the browser blocks sound, start playing silently (always allowed), then
+            fade the sound in on the guest's very first tap, key press or touch. */
+      if (root.classList.contains("splash-lock")) {
+        var silentTries = 0, silentOk = false;
+        var silentStart = function () {
+          if (on || userMuted || failed || silentOk) return;
+          audio.muted = true;
+          audio.volume = 1;
+          var q = audio.play();
+          if (q && q.then) q.then(function () {
+            silentOk = true;
+          }).catch(function () {
+            /* some browsers reject this if it runs too early: try again once the file is ready */
+            if (++silentTries < 4) setTimeout(silentStart, 500 * silentTries);
+          });
+        };
+        audio.addEventListener("canplay", function () { silentStart(); }, { once: true });
+        audio.volume = 0;
+        pending = true;            /* the next tap anywhere brings the music in */
+        setState(true);
+        var ap = audio.play();
+        if (ap && ap.then) {
+          ap.then(function () {
+            if (on || userMuted) return;
+            on = true; pending = false; setState(true); ramp(TARGET, FADE_IN);
+          }).catch(silentStart);
+        } else { silentStart(); }
+
+        var evs = ["pointerup", "touchend", "mousedown", "keydown", "click"];
+        var detach = function () { evs.forEach(function (n) { document.removeEventListener(n, first, true); }); };
+        var first = function (e) {
+          if (!root.classList.contains("splash-lock") || on || userMuted || failed) { detach(); return; }
+          if (e.target && e.target.closest && e.target.closest(".music-btn, .splash-music-btn")) return;
+          window.weddingMusic.startIfAllowed();
+          if (on) detach();
+        };
+        evs.forEach(function (n) { document.addEventListener(n, first, true); });
+      }
+      setState(on || pending);
+    })();
+  </script>
+
+  <script>
+    /* Splash screen */
+    (function () {
+      var root = document.documentElement;
+      var splash = document.getElementById("splash");
+      var btn = document.getElementById("splash-open");
+      if (!splash) return;
+      var behind = document.querySelectorAll("header, main, footer, .wa-fab, .music-btn, .music-hint");
+
+      if (!root.classList.contains("splash-lock")) { splash.parentNode.removeChild(splash); return; }
+      for (var i = 0; i < behind.length; i++) behind[i].setAttribute("inert", "");
+      setTimeout(function () { btn.focus({ preventScroll: true }); }, 2600);
+
+      var opened = false;
+      function open() {
+        if (opened) return;
+        opened = true;
+        if (window.weddingMusic) window.weddingMusic.startIfAllowed();
+        splash.classList.add("is-opening");
+        root.classList.remove("splash-lock");
+        window.scrollTo(0, 0);
+        for (var i = 0; i < behind.length; i++) behind[i].removeAttribute("inert");
+        var removed = false;
+        function cleanup() { if (removed) return; removed = true; if (splash.parentNode) splash.parentNode.removeChild(splash); }
+        splash.addEventListener("transitionend", function (e) { if (e.target === splash && e.propertyName === "transform") cleanup(); });
+        setTimeout(cleanup, 1800);
+      }
+      btn.addEventListener("click", open);
+    })();
+  </script>
+
+  <script>
+    /* Moments carousel: seamless infinite loop, auto-slides, photos from img2 */
+    (function () {
+      /* EDIT THIS LIST to match the file names in your img2 folder.
+         Any file that can't be found is skipped automatically. */
+      var PHOTOS = [
+        "img2/3.png", "img2/5.png", "img2/4.png",
+        "img2/2.png", "img2/6.png", "img2/7.png", "img2/8.png",
+        "img2/9.png", "img2/10.png"
+      ];
+      var INTERVAL = 4000; /* ms between slides */
+
+      var root = document.getElementById("moments-carousel");
+      var track = document.getElementById("carousel-track");
+      var dotsBox = document.getElementById("carousel-dots");
+      var current = document.getElementById("carousel-current");
+      var total = document.getElementById("carousel-total");
+      if (!root || !track) return;
+      var prev = root.querySelector(".carousel-prev");
+      var next = root.querySelector(".carousel-next");
+      var n = 0;          /* number of real photos */
+      var pos = 1;        /* DOM position: 0 = clone of last, 1..n = real, n+1 = clone of first */
+      var timer = null, hovering = false, touching = false, settleT = null;
+
+      function makeSlide(src, i, isClone) {
+        var li = document.createElement("li");
+        li.className = "carousel-slide";
+        if (isClone) li.setAttribute("aria-hidden", "true");
+        var img = new Image();
+        img.alt = isClone ? "" : "Wedding moment " + (i + 1);
+        img.decoding = "async";
+        img.src = src;
+        li.appendChild(img);
+        return li;
+      }
+
+      function jump(p) {            /* instant, invisible reposition */
+        pos = p;
+        track.style.scrollBehavior = "auto";
+        track.style.scrollSnapType = "none";
+        track.scrollLeft = p * track.clientWidth;
+        void track.offsetWidth;
+        track.style.scrollSnapType = "";
+        track.style.scrollBehavior = "";
+      }
+      function slideTo(p) {         /* animated */
+        track.scrollTo({ left: p * track.clientWidth, behavior: "smooth" });
+      }
+      function realIndex() { return ((pos - 1) % n + n) % n; }
+      function updateUI() {
+        var r = realIndex();
+        for (var d = 0; d < dotsBox.children.length; d++) dotsBox.children[d].classList.toggle("is-active", d === r);
+        current.textContent = r + 1;
+      }
+      function onScroll() {
+        if (!track.clientWidth) return;
+        pos = Math.round(track.scrollLeft / track.clientWidth);
+        updateUI();
+        clearTimeout(settleT);
+        settleT = setTimeout(function () {       /* once motion stops, hop off the clones */
+          if (pos <= 0) jump(n);
+          else if (pos >= n + 1) jump(1);
+        }, 120);
+      }
+
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+      function start() {
+        stop();
+        if (n < 2 || hovering || touching || document.hidden) return;
+        timer = setInterval(function () { slideTo(pos + 1); }, INTERVAL);
+      }
+      function go(delta) { slideTo(pos + delta); start(); }
+
+      function build(good) {
+        n = good.length;
+        if (!n) { root.style.display = "none"; return; }
+        total.textContent = n;
+        if (n > 1) track.appendChild(makeSlide(good[n - 1], n - 1, true));
+        good.forEach(function (src, i) { track.appendChild(makeSlide(src, i, false)); });
+        if (n > 1) track.appendChild(makeSlide(good[0], 0, true));
+        for (var i = 0; i < n; i++) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "carousel-dot";
+          b.setAttribute("aria-label", "Go to photo " + (i + 1));
+          (function (k) { b.addEventListener("click", function () { slideTo(k + 1); start(); }); })(i);
+          dotsBox.appendChild(b);
+        }
+        if (n < 2) { prev.style.display = next.style.display = "none"; dotsBox.style.display = "none"; }
+        jump(n > 1 ? 1 : 0);
+        updateUI();
+
+        prev.addEventListener("click", function () { go(-1); });
+        next.addEventListener("click", function () { go(1); });
+        track.addEventListener("scroll", function () { window.requestAnimationFrame(onScroll); }, { passive: true });
+        track.addEventListener("keydown", function (e) {
+          if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
+          if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
+        });
+        root.addEventListener("mouseenter", function () { hovering = true; stop(); });
+        root.addEventListener("mouseleave", function () { hovering = false; start(); });
+        root.addEventListener("touchstart", function () { touching = true; stop(); }, { passive: true });
+        root.addEventListener("touchend", function () { touching = false; setTimeout(start, 1500); }, { passive: true });
+        document.addEventListener("visibilitychange", start);
+        window.addEventListener("resize", function () { jump(pos); });
+        start();
+      }
+
+      /* Preload every photo first so missing files are dropped cleanly */
+      var results = new Array(PHOTOS.length), done = 0;
+      PHOTOS.forEach(function (src, i) {
+        var t = new Image();
+        function fin(ok) {
+          results[i] = ok ? src : null;
+          if (++done === PHOTOS.length) build(results.filter(Boolean));
+        }
+        t.onload = function () { fin(true); };
+        t.onerror = function () { fin(false); };
+        t.src = src;
+      });
+    })();
+  </script>
+
+  <script>
+    /* Hero: crossfading photo carousel + top menu that appears after the hero */
+    (function () {
+      /* EDIT THIS LIST: extra photos for the hero (img/hero.jpeg is already first).
+         Any file that can't be found is skipped automatically. */
+      var EXTRA = ["img2/2.png", "img2/3.png", "img2/4.png", "img2/5.png"];
+      var INTERVAL = 5500; /* ms per photo */
+
+      var wrap = document.getElementById("hero-slides");
+      var hero = document.getElementById("hero");
+      var header = document.querySelector(".header");
+      var slides = [wrap.firstElementChild], idx = 0, timer = null;
+
+      function show(i) {
+        slides[idx].classList.remove("is-active");
+        idx = i;
+        slides[idx].classList.add("is-active");
+      }
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+      function start() {
+        stop();
+        if (slides.length < 2 || document.hidden) return;
+        timer = setInterval(function () { show((idx + 1) % slides.length); }, INTERVAL);
+      }
+
+      function checkHeader() {
+        if (!header || !hero) return;
+        header.classList.toggle("is-visible", window.scrollY > hero.offsetHeight - 120);
+      }
+      window.addEventListener("scroll", checkHeader, { passive: true });
+      window.addEventListener("resize", checkHeader);
+      checkHeader();
+
+      var results = new Array(EXTRA.length), done = 0;
+      if (!EXTRA.length) return;
+      EXTRA.forEach(function (src, i) {
+        var t = new Image();
+        function fin(ok) {
+          results[i] = ok ? src : null;
+          if (++done === EXTRA.length) {
+            results.filter(Boolean).forEach(function (u) {
+              var img = document.createElement("img");
+              img.className = "hero-slide";
+              img.alt = "";
+              img.src = u;
+              wrap.appendChild(img);
+              slides.push(img);
+            });
+            start();
+          }
+        }
+        t.onload = function () { fin(true); };
+        t.onerror = function () { fin(false); };
+        t.src = src;
+      });
+      document.addEventListener("visibilitychange", function () { document.hidden ? stop() : start(); });
+    })();
+  </script>
+  <script src="enhance.js"></script>
+  <script src="/app.js"></script>
 </body>
 
 </html>
