@@ -243,180 +243,6 @@
     }
     .music-hint.show { opacity: 1; }
     @media (prefers-reduced-motion: reduce) { .music-btn::after { animation: none; } }
-
-    /* Gentle fade-in when arriving from the welcome page */
-    body { animation: page-enter 1s ease both; }
-    @keyframes page-enter { from { opacity: 0; } to { opacity: 1; } }
-    @media (prefers-reduced-motion: reduce) { body { animation: none; } }
-
-    /* ===== Full-screen hero carousel ===== */
-    html { scroll-behavior: smooth; }
-    section[id] { scroll-margin-top: 3.5rem; }
-    .hero-cover {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      height: 100svh;
-      min-height: 560px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #fff;
-      background: linear-gradient(160deg, #4e5039, #696b50);
-    }
-    .hero-slides { position: absolute; inset: 0; }
-    .hero-slide {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: 50% 28%;
-      opacity: 0;
-      transform: scale(1);
-      transition: opacity 1.6s ease, transform 10s linear;
-    }
-    .hero-slide.is-active { opacity: 1; transform: scale(1.08); }
-    .hero-shade {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to bottom, rgba(0, 0, 0, .38) 0%, rgba(0, 0, 0, .28) 45%, rgba(40, 41, 30, .25) 70%, rgba(105, 107, 80, .96) 100%);
-    }
-    .hero-content { position: relative; z-index: 2; padding: 0 1.25rem 3rem; text-shadow: 0 2px 18px rgba(0, 0, 0, .45); }
-    .hero-content > * { opacity: 0; animation: hero-rise 1.1s cubic-bezier(.2, .7, .2, 1) forwards; }
-    .hero-eyebrow {
-      margin: 0 0 1.1rem;
-      font-family: "Manrope", sans-serif;
-      font-size: clamp(.68rem, 2.6vw, .95rem);
-      letter-spacing: .42em;
-      text-transform: uppercase;
-      animation-delay: .2s;
-    }
-    .hero-content h1 {
-      margin: 0;
-      font-family: "Great Vibes", cursive;
-      font-weight: 400;
-      line-height: 1.05;
-      font-size: clamp(3rem, 15vw, 6.8rem);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      animation-delay: .45s;
-    }
-    .hero-content h1 .hn { display: block; }
-    .hero-heart { width: clamp(1.7rem, 6vw, 2.6rem); height: auto; margin: .9rem 0 .6rem; color: #e6d7ad; filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .35)); animation: hero-beat 2.4s ease-in-out 2s infinite; }
-    .hero-date {
-      margin: 1.6rem 0 0;
-      font-family: "Manrope", sans-serif;
-      font-weight: 300;
-      font-size: clamp(1.05rem, 4.6vw, 1.9rem);
-      letter-spacing: .14em;
-      line-height: 1.5;
-      animation-delay: .85s;
-    }
-    .hero-place {
-      margin: .6rem 0 0;
-      font-family: "Manrope", sans-serif;
-      font-weight: 500;
-      font-size: clamp(.78rem, 3vw, 1rem);
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: #e6d7ad;
-      animation-delay: 1.1s;
-    }
-    .hero-chevron {
-      position: absolute;
-      z-index: 2;
-      left: 50%;
-      bottom: calc(5.2rem + env(safe-area-inset-bottom, 0px));
-      width: 1.5rem;
-      margin-left: -.75rem;
-      color: #e6d7ad;
-      animation: hero-bob 1.8s ease-in-out infinite;
-    }
-    .hero-chevron svg { display: block; width: 100%; height: auto; }
-    .hero-bar {
-      position: absolute;
-      z-index: 3;
-      left: 0; right: 0;
-      bottom: 0;
-      display: flex;
-      align-items: center;
-      gap: .6rem;
-      padding: 0 5.2rem calc(1.1rem + env(safe-area-inset-bottom, 0px)) 1rem;
-    }
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      white-space: nowrap;
-      padding: .85rem 1.15rem;
-      border-radius: 999px;
-      background: rgba(28, 29, 22, .78);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, .14);
-      color: #fff;
-      text-decoration: none;
-      font-family: "Manrope", sans-serif;
-      font-weight: 500;
-      font-size: .68rem;
-      letter-spacing: .17em;
-      text-transform: uppercase;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, .25);
-      transition: background .2s, transform .2s;
-    }
-    .hero-pill:hover, .hero-pill:focus-visible { background: rgba(28, 29, 22, .95); transform: translateY(-1px); }
-    .hero-pill svg { width: 1rem; height: 1rem; color: #e6d7ad; flex: none; }
-    .hero-pill-scroll i { width: .5rem; height: .5rem; border-radius: 50%; background: #e6d7ad; flex: none; }
-    @media (min-width: 768px) {
-      .hero-bar { padding: 0 6rem calc(1.5rem + env(safe-area-inset-bottom, 0px)) 1.75rem; }
-      .hero-pill-scroll { position: absolute; left: 50%; transform: translateX(-50%); }
-      .hero-pill-scroll:hover, .hero-pill-scroll:focus-visible { transform: translateX(-50%) translateY(-1px); }
-      .hero-chevron { bottom: calc(6rem + env(safe-area-inset-bottom, 0px)); }
-    }
-    @keyframes hero-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
-    @keyframes hero-bob { 0%, 100% { transform: translateY(0); opacity: .9; } 50% { transform: translateY(-7px); opacity: .5; } }
-    @keyframes hero-beat { 0%, 100% { transform: scale(1); } 12% { transform: scale(1.18); } 24% { transform: scale(1); } }
-    @media (prefers-reduced-motion: reduce) {
-      .hero-slide, .hero-slide.is-active { transform: none; transition: opacity .6s ease; }
-      .hero-content > *, .hero-chevron, .hero-heart { animation: none; opacity: 1; }
-    }
-
-    /* Top menu bar: hidden over the hero, slides in once you scroll past it */
-    .header {
-      position: fixed !important;
-      top: 0; left: 0; right: 0;
-      z-index: 90;
-      transform: translateY(-110%);
-      transition: transform .4s ease;
-      background: rgba(247, 244, 232, .96);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 1px 0 rgba(105, 107, 80, .18);
-    }
-    .header.is-visible { transform: none; }
-
-    /* Music button moves to the bottom-right, like the reference */
-    .music-btn {
-      left: auto;
-      right: max(1rem, env(safe-area-inset-right, 0px));
-      border-radius: 18px;
-      width: 3.4rem;
-      height: 3.4rem;
-      background: rgba(247, 244, 232, .95);
-      color: #696b50;
-      border-color: rgba(105, 107, 80, .25);
-    }
-    .music-btn:hover, .music-btn:focus-visible { background: #fff; }
-    .music-btn::after { border-radius: 24px; }
-    .music-hint { left: auto; right: max(5rem, calc(env(safe-area-inset-right, 0px) + 5rem)); bottom: max(1.7rem, calc(env(safe-area-inset-bottom, 0px) + .7rem)); }
-    /* keep the WhatsApp button clear of the music button */
-    .wa-fab { bottom: calc(5.6rem + env(safe-area-inset-bottom, 0px)) !important; }
   </style>
   <script>document.documentElement.classList.add("js")</script>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -432,33 +258,29 @@
   </header>
 
   <main>
-    <section class="hero-cover" id="hero" aria-labelledby="couple-name">
-      <div class="hero-slides" id="hero-slides" aria-hidden="true">
-        <img class="hero-slide is-active" src="img/hero.jpeg" alt="">
+    <section class="hero paper-section" aria-labelledby="couple-name">
+      <div class="botanical botanical-top" aria-hidden="true">
+        <svg viewBox="0 0 120 260" fill="none">
+          <path d="M14 255C48 202 29 158 67 113 91 83 96 43 104 7M50 144C25 134 21 113 25 98c21 6 30 21 25 46ZM70 111c-3-23 7-40 24-46 6 20-3 37-24 46ZM35 194c-20-1-31-15-32-30 19 0 33 11 32 30ZM88 73c-1-22 10-35 24-39 2 18-7 32-24 39ZM21 226c-14-1-22-10-21-22 13 2 22 9 21 22Z" stroke="currentColor" stroke-width=".8" />
+          <path d="M45 167c14-8 19-19 18-32M76 123c12-6 18-16 20-29M30 208c12-7 16-15 16-25" stroke="currentColor" stroke-width=".7" />
+        </svg>
       </div>
-      <div class="hero-shade" aria-hidden="true"></div>
-
-      <div class="hero-content">
-        <p class="hero-eyebrow">Join us as we tie the knot</p>
-        <h1 id="couple-name">
-          <span class="hn hn1">Wofai</span>
-          <svg class="hero-heart" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 21.2 10.6 20C5.4 15.3 2 12.2 2 8.5 2 5.4 4.4 3 7.5 3c1.7 0 3.4.8 4.5 2.1C13.1 3.8 14.8 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.7-3.4 6.8-8.6 11.5L12 21.2Z"/></svg>
-          <span class="hn hn2">Tamunobelema</span>
-        </h1>
-        <p class="hero-date">Wednesday, 30th December 2026</p>
-        <p class="hero-place">Marina Resort · Calabar</p>
-      </div>
-
-      <a class="hero-chevron" href="#venue" tabindex="-1" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 11 6-6 6 6"/><path d="m6 18 6-6 6 6"/></svg>
-      </a>
-
-      <div class="hero-bar">
-        <a class="hero-pill" href="https://maps.google.com/?q=Marina+Resort+Calabar+Nigeria" target="_blank" rel="noreferrer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          Venue
-        </a>
-        <a class="hero-pill hero-pill-scroll" href="#venue"><i aria-hidden="true"></i> Scroll up for details</a>
+      <div class="hero-inner">
+        <p class="eyebrow">TOGETHER WITH THEIR FAMILIES</p>
+        <p class="script-line">with joyful hearts</p>
+        <h1 id="couple-name">Wofai <span>&amp;</span><br>Tamunobelema</h1>
+        <div class="flourish" aria-hidden="true">❧ &nbsp; ❦ &nbsp; ❧</div>
+        <p class="hero-invite">joyfully invite you to celebrate<br>their wedding day</p>
+        <figure class="hero-landscape hero-photo">
+          <img src="img/hero.jpeg" alt="Wofai and Tamunobelema sharing a tender moment">
+        </figure>
+        <div class="wedding-date">
+          <p class="eyebrow">WEDDING DATE</p>
+          <p class="date-large">30 <i></i> 12 <i></i> 2026</p>
+          <p class="weekday">WEDNESDAY</p>
+          <p class="date-script">a day made more beautiful with you</p>
+          <div class="tiny-flourish" aria-hidden="true">⌁ ❦ ⌁</div>
+        </div>
       </div>
     </section>
 
@@ -494,6 +316,7 @@
             <p class="eyebrow">ACCOMMODATION</p>
             <h3>A place to rest</h3>
             <p>If you need accommodation or have special arrangements, please message our wedding coordinator, Patience Igbagri, on WhatsApp.</p>
+            <a class="wa-link" href="https://wa.me/2347057370591?text=Hello%20Patience%20Planner%2C%20I%27m%20a%20guest%20at%20Wofai%20%26%20Tamunobelema%27s%20wedding%20%2830%20Dec%202026%2C%20Marina%20Resort%2C%20Calabar%29%20and%20I%20need%20help%20with%20accommodation." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.95L2 22l5.2-1.36A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.08.8.82-3-.2-.31a8.2 8.2 0 1 1 6.96 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.16.25-.63.8-.78.97-.14.16-.28.18-.53.06-.25-.13-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.1-.5.12-.11.25-.28.37-.42.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03 0 1.2.87 2.35 1 2.51.12.17 1.7 2.6 4.12 3.65.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28Z"/></svg> Accommodation help</a>
           </div>
         </article>
         <article class="detail-item"><span class="detail-icon" aria-hidden="true">⌑</span>
@@ -797,64 +620,6 @@
       });
       audio.addEventListener("error", function () { setState(false); });
       setState(false);
-    })();
-  </script>
-  <script>
-    /* Hero: crossfading photo carousel + top menu that appears after the hero */
-    (function () {
-      /* EDIT THIS LIST: extra photos for the hero (img/hero.png is already first).
-         Any file that can't be found is skipped automatically. */
-      var EXTRA = ["img2/2.png", "img2/3.png", "img2/4.png", "img2/5.png"];
-      var INTERVAL = 5500; /* ms per photo */
-
-      var wrap = document.getElementById("hero-slides");
-      var hero = document.getElementById("hero");
-      var header = document.querySelector(".header");
-      var slides = [wrap.firstElementChild], idx = 0, timer = null;
-
-      function show(i) {
-        slides[idx].classList.remove("is-active");
-        idx = i;
-        slides[idx].classList.add("is-active");
-      }
-      function stop() { if (timer) { clearInterval(timer); timer = null; } }
-      function start() {
-        stop();
-        if (slides.length < 2 || document.hidden) return;
-        timer = setInterval(function () { show((idx + 1) % slides.length); }, INTERVAL);
-      }
-
-      var results = new Array(EXTRA.length), done = 0;
-      if (!EXTRA.length) return;
-      EXTRA.forEach(function (src, i) {
-        var t = new Image();
-        function fin(ok) {
-          results[i] = ok ? src : null;
-          if (++done === EXTRA.length) {
-            results.filter(Boolean).forEach(function (u) {
-              var img = document.createElement("img");
-              img.className = "hero-slide";
-              img.alt = "";
-              img.src = u;
-              wrap.appendChild(img);
-              slides.push(img);
-            });
-            start();
-          }
-        }
-        t.onload = function () { fin(true); };
-        t.onerror = function () { fin(false); };
-        t.src = src;
-      });
-      document.addEventListener("visibilitychange", function () { document.hidden ? stop() : start(); });
-
-      function checkHeader() {
-        if (!header || !hero) return;
-        header.classList.toggle("is-visible", window.scrollY > hero.offsetHeight - 120);
-      }
-      window.addEventListener("scroll", checkHeader, { passive: true });
-      window.addEventListener("resize", checkHeader);
-      checkHeader();
     })();
   </script>
   <script src="enhance.js"></script>
