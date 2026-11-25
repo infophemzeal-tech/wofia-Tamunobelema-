@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="prefetch" href="invitation.html">
+  <link rel="prefetch" href="invitations.html">
   <style>
     /* Splash screen */
     html, body { margin: 0; height: 100%; overflow: hidden; background: #f7f4e8; }
@@ -149,8 +149,8 @@
     }
   </style>
   <script>
-    /* Old links like index.html#rsvp go straight to the invitation */
-    if (location.hash) location.replace("invitation.html" + location.hash);
+    /* Old links like index.html#rsvp go straight to the s */
+    if (location.hash) location.replace("invitations.html" + location.hash);
   </script>
 </head>
 
@@ -168,7 +168,7 @@
     (function () {
       var splash = document.getElementById("splash");
       var btn = document.getElementById("splash-open");
-      var TARGET = "invitation.html";
+      var TARGET = "invitations.html";
       var go = false;
       setTimeout(function () { btn.focus({ preventScroll: true }); }, 2600);
 
