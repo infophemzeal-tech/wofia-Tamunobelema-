@@ -60,7 +60,7 @@
         needs_accommodation: !!(f.accommodation && f.accommodation.checked)
       };
       var lines = [
-        'Hello Patience Planner, this is my RSVP for Wofai & Tamunobelema\u2019s wedding (30 Dec 2026, Marina Resort, Calabar).',
+        'Hello Patience, this is my RSVP for Wofai & Tamunobelema\u2019s wedding (30 Dec 2026, Marina Resort, Calabar).',
         '', 'Name: ' + data.name, 'Email: ' + data.email, 'Reply: ' + data.attendance,
         'Guests: ' + data.guests, 'Dietary: ' + (data.dietary || 'None'),
         'Needs accommodation help: ' + (data.needs_accommodation ? 'Yes' : 'No')
