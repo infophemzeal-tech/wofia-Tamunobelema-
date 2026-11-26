@@ -658,6 +658,47 @@
       .gb-svg, .gb-lid, .gb-spark, .giftbox.is-open .gb-glow, .giftbox.is-open .gb-svg, .cd-num.tick { animation: none !important; }
       .gb-lid, .js .gift-panel, .js .gift-panel.is-open { transition: none; }
     }
+
+    /* ===== Legible "tap to open" prompts ===== */
+    .gb-hint {
+      display: block;
+      width: fit-content;
+      margin: 1rem auto 0;
+      padding: .7rem 1.35rem;
+      border: 1px solid #696b50;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .75);
+      color: #3f402e;
+      font-family: "Manrope", sans-serif;
+      font-weight: 600;
+      font-size: .8rem;
+      letter-spacing: .14em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      opacity: 1;
+      box-shadow: 0 6px 16px rgba(105, 107, 80, .16);
+      animation: hint-nudge 2.6s ease-in-out infinite;
+    }
+    .giftbox.is-open ~ .gb-hint, .gb-wrap.is-open + .gb-hint { animation: none; }
+    @keyframes hint-nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+    @media (prefers-reduced-motion: reduce) { .gb-hint { animation: none; } }
+    .splash-music-label {
+      font-weight: 600;
+      font-size: .74rem;
+      letter-spacing: .2em;
+      color: #3f402e;
+      opacity: 1;
+    }
+
+    /* ===== Centre-aligned text blocks ===== */
+    .forever-copy, .thank-you, .rsvp-heading, .quote-band { text-align: center !important; }
+    .forever-copy p, .thank-you p, .rsvp-heading p, .quote-band p {
+      margin-left: auto !important;
+      margin-right: auto !important;
+      text-align: center !important;
+    }
+    .forever-copy p, .thank-you p { max-width: 36rem; }
+    .rsvp-heading .rsvp-flourish { display: block; width: 100%; margin-left: auto !important; margin-right: auto !important; text-align: center !important; }
   </style>
   <script>document.documentElement.classList.add("js"); if (!location.hash) document.documentElement.classList.add("splash-lock");</script>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -693,7 +734,7 @@
   <main>
     <section class="hero-cover" id="hero" aria-labelledby="couple-name">
       <div class="hero-slides" id="hero-slides" aria-hidden="true">
-        <img class="hero-slide is-active" src="img/hero.jpeg" alt="">
+        <img class="hero-slide is-active" src="hero/1.png" alt="">
       </div>
       <div class="hero-shade" aria-hidden="true"></div>
 
@@ -743,7 +784,7 @@
         <div class="cd-box"><span class="cd-num" data-unit="minutes">00</span><span class="cd-label">Minutes</span></div>
         <div class="cd-box cd-box-sec"><span class="cd-num" data-unit="seconds">00</span><span class="cd-label">Seconds</span></div>
       </div>
-         </section>
+    </section>
 
     <section class="details-section paper-section" id="details">
       <div class="section-intro">
@@ -1050,6 +1091,33 @@
         }
       };
 
+      /* Leaving the page (switching tab or app, locking the phone, closing) pauses the music.
+         Coming back resumes it with a short fade, unless the guest had muted it. */
+      var wasPlaying = false;
+      function pauseForHide() {
+        if (audio.paused) return;
+        wasPlaying = true;
+        clearInterval(fadeTimer);
+        if (gain && ctx) { gain.gain.cancelScheduledValues(ctx.currentTime); gain.gain.value = 0; }
+        audio.pause();
+      }
+      function resumeAfterShow() {
+        if (!wasPlaying) return;
+        wasPlaying = false;
+        if (userMuted || failed) return;
+        if (!on) { var q = audio.play(); if (q && q.catch) q.catch(function () {}); return; }   /* still waiting for the first tap: keep it silent */
+        if (ctx && ctx.state === "suspended") ctx.resume();
+        if (gain) { gain.gain.cancelScheduledValues(0); gain.gain.value = 0; } else { audio.volume = 0; }
+        var p = audio.play();
+        if (p && p.then) {
+          p.then(function () { if (on) ramp(TARGET, 1500); })
+           .catch(function () { on = false; setState(false); });   /* browser refused: guest can tap the button */
+        }
+      }
+      document.addEventListener("visibilitychange", function () { document.hidden ? pauseForHide() : resumeAfterShow(); });
+      window.addEventListener("pagehide", pauseForHide);
+      window.addEventListener("pageshow", function (e) { if (e.persisted) resumeAfterShow(); });
+
       /* While the splash is showing, the music starts by itself.
          1) Try normal autoplay (works in some browsers).
          2) If the browser blocks sound, start playing silently (always allowed), then
@@ -1251,9 +1319,10 @@
   <script>
     /* Hero: crossfading photo carousel + top menu that appears after the hero */
     (function () {
-      /* EDIT THIS LIST: extra photos for the hero (img/hero.jpeg is already first).
+      /* Hero photos live in the "hero" folder: hero/1.png ... hero/8.png.
+         hero/1.png is already in the page (it shows first); the rest are listed here.
          Any file that can't be found is skipped automatically. */
-      var EXTRA = ["img2/3.png", "img2/4.png", "img2/5.png", "img2/2.png"];
+      var EXTRA = ["hero/2.png", "hero/3.png", "hero/4.png", "hero/5.png", "hero/6.png", "hero/7.png", "hero/8.png"];
       var INTERVAL = 5500; /* ms per photo */
 
       var wrap = document.getElementById("hero-slides");
@@ -1381,6 +1450,7 @@
       btn.addEventListener("click", function () {
         var open = !btn.classList.contains("is-open");
         btn.classList.toggle("is-open", open);
+        btn.parentNode.classList.toggle("is-open", open);
         btn.setAttribute("aria-expanded", open ? "true" : "false");
         panel.classList.toggle("is-open", open);
         hint.textContent = open ? "Tap to close the gift box" : "Tap to open our gift box";
